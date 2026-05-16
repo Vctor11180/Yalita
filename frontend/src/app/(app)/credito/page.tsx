@@ -5,7 +5,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { useScore } from "@/hooks";
 import { Card, Button, Badge } from "@/components/ui";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { getScoreTier, SCORE } from "@quipu/shared";
+import { getScoreTier, SCORE } from "@yalita/shared";
 import { formatAnnualRateBps, calculateEstimatedRate, calculateCreditLimit } from "@/lib/utils";
 
 export default function CreditoPage() {

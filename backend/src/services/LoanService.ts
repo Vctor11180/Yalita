@@ -1,10 +1,15 @@
 import { db } from "../lib/db";
 import { publicClient, walletClient, contractAddresses } from "../lib/blockchain";
-import { LENDING_POOL_ABI } from "@quipu/shared";
-import type { Address, LoanStatus as SharedLoanStatus } from "@quipu/shared";
-import type { LoanStatus, PaymentSource } from "@prisma/client";
+import { LENDING_POOL_ABI } from "@yalita/shared";
+import type { Address, LoanStatus as SharedLoanStatus } from "@yalita/shared";
+import { WavyNodeService } from "./WavyNodeService";
+
+type LoanStatus = "ACTIVE" | "REPAID" | "OVERDUE" | "DEFAULTED";
+type PaymentSource = "MANUAL" | "AUTO_QR";
 
 export class LoanService {
+  private readonly wavyNodeService = new WavyNodeService();
+
   async getActive(walletAddress: Address) {
     return db.loan.findFirst({
       where: { walletAddress, status: "ACTIVE" },
@@ -49,6 +54,11 @@ export class LoanService {
 
     // Quote para conocer la tasa
     const quote = await this.getQuote(input.walletAddress, principalUsdc, input.durationDays);
+
+    const risk = await this.wavyNodeService.getRiskScore(input.walletAddress);
+    if (risk.riskScore < 30) {
+      throw new Error("RISK_TOO_HIGH: Wavy Node risk score below threshold");
+    }
 
     const txHash = await walletClient.writeContract({
       address: contractAddresses.lendingPool,

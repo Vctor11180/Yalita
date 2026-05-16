@@ -1,6 +1,6 @@
 import { env } from "../lib/env";
 import { logger } from "../lib/logger";
-import type { Address, DataSource } from "@quipu/shared";
+import type { Address, DataSource } from "@yalita/shared";
 
 /**
  * Servicio que envuelve la integración con Reclaim Protocol.

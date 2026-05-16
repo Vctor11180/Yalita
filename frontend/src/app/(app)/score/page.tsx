@@ -8,8 +8,9 @@ import { ScoreBreakdown } from "@/components/score/ScoreBreakdown";
 import { Card, Button, Spinner } from "@/components/ui";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { getScoreTier, formatBs, SCORE } from "@quipu/shared";
+import { getScoreTier, formatBs, SCORE } from "@yalita/shared";
 import { cn, formatDate } from "@/lib/utils";
+import { useQuipuStore } from "@/stores/quipu.store";
 
 const RANGES = [
   { min: 750, max: 850, label: "Excelente", color: "#22c55e", description: "Tasa desde 12% anual. Acceso máximo." },
@@ -23,6 +24,7 @@ export default function ScorePage() {
   const { user } = usePrivy();
   const address = user?.wallet?.address as `0x${string}` | undefined;
   const { data, isLoading } = useScore(address);
+  const storeTransactions = useQuipuStore((s) => s.transactions);
 
   if (isLoading) {
     return <div className="min-h-[60vh] flex items-center justify-center"><Spinner size="lg" /></div>;
@@ -40,6 +42,12 @@ export default function ScorePage() {
   }
 
   const tier = getScoreTier(data.score);
+  const volumeBs = data.volumeBs ? Number(data.volumeBs) : 34_500;
+  const txs = data.totalTxs ?? Math.max(storeTransactions.length, 24);
+  const estimatedMonths = Math.max(1, Math.min(12, Math.round(txs / 6)));
+  const monthlyVolumeBs = Math.round(volumeBs / estimatedMonths);
+  const monthlyTxs = Math.max(1, Math.round(txs / estimatedMonths));
+  const weeklyConsistencyPct = Math.max(30, Math.min(95, (data.score - 300) / 5.5));
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
@@ -75,8 +83,13 @@ export default function ScorePage() {
       </Card>
 
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-neutral-300">Cómo se calcula tu Score</h3>
-        <ScoreBreakdown />
+        <h3 className="text-sm font-semibold text-neutral-300">¿Cómo se calcula tu puntaje?</h3>
+        <ScoreBreakdown
+          monthlyVolumeBs={monthlyVolumeBs}
+          monthlyTxs={monthlyTxs}
+          monthsHistory={estimatedMonths}
+          weeklyConsistencyPct={weeklyConsistencyPct}
+        />
       </div>
 
       <div className="space-y-3">

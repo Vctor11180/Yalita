@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { LOAN, SCORE } from "@quipu/shared/constants";
+import { LOAN, SCORE } from "@yalita/shared/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

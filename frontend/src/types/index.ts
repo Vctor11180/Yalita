@@ -1,5 +1,5 @@
 // Re-export desde shared para conveniencia
-export type * from "@quipu/shared";
+export type * from "@yalita/shared";
 
 // Tipos exclusivos de UI
 import type { ReactNode } from "react";

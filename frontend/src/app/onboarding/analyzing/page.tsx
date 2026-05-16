@@ -88,7 +88,7 @@ export default function AnalyzingState() {
 
   return (
     <main className={`min-h-screen bg-quipu-dark flex flex-col items-center justify-center p-6 text-white transition-transform duration-500 ease-in-out ${isExiting ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}`}>
-      {/* Animated Quipu Knot */}
+      {/* Animated Yalita Knot */}
       <div className="w-32 h-32 mb-12 relative">
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_12px_rgba(243,156,18,0.4)]">
           <path 

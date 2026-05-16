@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@quipu/shared"],
+  transpilePackages: ["@yalita/shared"],
   experimental: {
     optimizePackageImports: ["framer-motion", "@privy-io/react-auth"],
   },

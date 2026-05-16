@@ -1,23 +1,23 @@
 import { formatUSDC, calculateInterest } from "@/lib/utils";
-import { LOAN } from "@quipu/shared";
+import { LOAN } from "@yalita/shared";
 import { cn } from "@/lib/utils";
 
 interface LoanComparisonTableProps {
   principalUsdc: bigint;
   days: number;
-  quipuTotalDue: bigint;
-  quipuRateBps: number;
+  YalitaTotalDue: bigint;
+  YalitaRateBps: number;
 }
 
-export function LoanComparisonTable({ principalUsdc, days, quipuTotalDue, quipuRateBps }: LoanComparisonTableProps) {
+export function LoanComparisonTable({ principalUsdc, days, YalitaTotalDue, YalitaRateBps }: LoanComparisonTableProps) {
   const informalTotal = principalUsdc + calculateInterest(principalUsdc, LOAN.INFORMAL_RATE_BPS, days);
   const bankTotal = principalUsdc + calculateInterest(principalUsdc, 1800, days);
-  const savings = informalTotal - quipuTotalDue;
+  const savings = informalTotal - YalitaTotalDue;
 
   const rows = [
     { label: "🦈 Prestamista informal", rate: `${LOAN.INFORMAL_RATE_BPS / 100}% anual`, total: informalTotal, color: "red" },
     { label: "🏦 Banco (si te aprueban)", rate: "18% anual", total: bankTotal, color: "neutral" },
-    { label: "✨ Quipu", rate: `${(quipuRateBps / 100).toFixed(1)}% anual`, total: quipuTotalDue, color: "green" },
+    { label: "✨ Yalita", rate: `${(YalitaRateBps / 100).toFixed(1)}% anual`, total: YalitaTotalDue, color: "green" },
   ] as const;
 
   const colorMap = {
@@ -42,7 +42,7 @@ export function LoanComparisonTable({ principalUsdc, days, quipuTotalDue, quipuR
       })}
       {savings > 0n && (
         <p className="text-center text-quipu-500 text-sm font-semibold pt-1">
-          🎉 Ahorrás {formatUSDC(savings)} con Quipu vs. el prestamista
+          🎉 Ahorrás {formatUSDC(savings)} con Yalita vs. el prestamista
         </p>
       )}
     </div>

@@ -1,17 +1,16 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "rootDir": "src",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@quipu/shared": ["../shared/src/index.ts"],
-      "@quipu/shared/*": ["../shared/src/*"]
+      "@yalita/shared": ["../shared/src/index.ts"],
+      "@yalita/shared/*": ["../shared/src/*"]
     }
   },
-  "include": ["src/**/*", "api/**/*", "prisma/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

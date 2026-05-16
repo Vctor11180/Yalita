@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { DataSource } from "@quipu/shared";
+import type { DataSource } from "@yalita/shared";
 
 type OnboardingStep = "login" | "connect" | "verify" | "done";
 

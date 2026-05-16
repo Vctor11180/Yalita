@@ -10,13 +10,14 @@ const dmSerif = DM_Serif_Display({ weight: "400", subsets: ["latin"], variable: 
 const lora = Lora({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
-  title: { default: "Yalita — Tu reputación es tu mayor activo", template: "%s · Yalita" },
-  description: "Identidad financiera descentralizada para Latam",
+  title: { default: "Yalita — Decentralized Payment Identity", template: "%s · Yalita" },
+  description:
+    "El primer protocolo que convierte tu historial de pagos QR en crédito justo. Sin banco. Sin colateral. Para los 210M de latinos sin acceso a crédito formal.",
   keywords: ["DPI", "Avalanche", "DeFi", "crédito", "Bolivia", "Latam", "Tigo Money", "zkTLS"],
   authors: [{ name: "Yalita Team" }],
   openGraph: {
-    title: "Yalita — Tu reputación es tu mayor activo",
-    description: "Identidad financiera descentralizada para Latam",
+    title: "Yalita Protocol",
+    description: "Crédito justo para los 210M de latinos sin historial bancario.",
     type: "website",
     locale: "es_BO",
   },

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────
-//  Constantes del protocolo Quipu — fuente única de verdad
+//  Constantes del protocolo Yalita — fuente única de verdad
 // ─────────────────────────────────────────────────────────────────
 
 import type { Address } from "./types";

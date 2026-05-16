@@ -1,8 +1,7 @@
 "use client";
 
 import { usePrivy } from "@privy-io/react-auth";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { AppTopbar } from "@/components/layout/AppTopbar";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -11,11 +10,7 @@ import { FullPageSpinner } from "@/components/ui";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { ready, authenticated } = usePrivy();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (ready && !authenticated) router.replace("/onboarding");
-  }, [ready, authenticated, router]);
+  if (ready && !authenticated) redirect("/onboarding");
 
   if (!ready || !authenticated) return <FullPageSpinner />;
 

@@ -1,4 +1,4 @@
-// Entry point de la API Quipu.
+// Entry point de la API Yalita.
 // Se monta sobre Hono y se sirve desde:
 //   - Node local (vía tsx en dev)
 //   - Vercel Serverless (vía api/index.ts)
@@ -25,7 +25,20 @@ import { webhookRoutes } from "./routes/webhooks";
 const app = new Hono();
 
 app.use("*", requestLogger);
-app.use("*", cors({ origin: env.ALLOWED_ORIGIN, credentials: true }));
+app.use(
+  "*",
+  cors({
+    origin: (origin) => {
+      if (!origin) return origin; // mismo servidor / mobile apps sin origin
+      if (env.ALLOWED_ORIGIN === "*") return origin;
+      const allowed = env.ALLOWED_ORIGIN.split(",").map((s) => s.trim()).includes(origin);
+      return allowed ? origin : null;
+    },
+    credentials: true,
+    allowHeaders: ["Content-Type", "Authorization"],
+    exposeHeaders: ["Content-Length"],
+  }),
+);
 app.use("*", rateLimitMiddleware);
 
 app.route("/health", healthRoutes);
@@ -42,7 +55,7 @@ app.notFound((c) => c.json({ error: "Not found", path: c.req.path }, 404));
 // Solo arrancar listener si no estamos en Vercel
 if (env.NODE_ENV !== "production" || !process.env["VERCEL"]) {
   serve({ fetch: app.fetch, port: env.PORT }, (info) => {
-    logger.info(`🚀 Quipu API ready on http://localhost:${info.port}`);
+    logger.info(`🚀 Yalita API ready on http://localhost:${info.port}`);
   });
 }
 

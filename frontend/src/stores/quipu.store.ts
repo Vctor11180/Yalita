@@ -24,6 +24,7 @@ interface QuipuState {
   userId: string;
   userName: string;
   userPhone: string;
+  isCiVerified: boolean;
 
   // Wallet
   balanceUsdc: number;
@@ -46,6 +47,7 @@ interface QuipuState {
 
   // ─── IDENTITY ACTIONS ───
   setUserName: (name: string) => void;
+  verifyCi: () => void;
 
   // ─── SCORE ACTIONS ───
   setScore: (score: number) => void;
@@ -178,10 +180,10 @@ export const useQuipuStore = create<QuipuState>((set, get) => ({
       description: merchant
         ? `Cobro de ${merchant}`
         : "Cobro de cliente",
-      merchant,
       timestamp: now,
       scoreImpact: 3,
     };
+    if (merchant) tx.merchant = merchant;
 
     const scoreEvt: ScoreEvent = {
       delta: 3,

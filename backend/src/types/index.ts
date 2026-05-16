@@ -1,5 +1,5 @@
 // Re-exports para conveniencia
-export type * from "@quipu/shared";
+export type * from "@yalita/shared";
 
 export interface ApiContext {
   userId: string;

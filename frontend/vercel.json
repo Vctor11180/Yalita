@@ -1,7 +1,15 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "cd .. && pnpm build --filter=@quipu/frontend",
-  "installCommand": "cd .. && pnpm install --frozen-lockfile",
-  "outputDirectory": ".next"
+  "buildCommand": "pnpm build",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_CHAIN_ID": "43113",
+    "NEXT_PUBLIC_RPC_URL": "https://api.avax-test.network/ext/bc/C/rpc"
+  },
+  "rewrites": [
+    {
+      "source": "/api/health",
+      "destination": "/api/health"
+    }
+  ]
 }

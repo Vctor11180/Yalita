@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2020",
     "lib": [
       "dom",
       "dom.iterable",
@@ -22,10 +22,10 @@
       "@/*": [
         "./src/*"
       ],
-      "@quipu/shared": [
+      "@yalita/shared": [
         "../shared/src/index.ts"
       ],
-      "@quipu/shared/*": [
+      "@yalita/shared/*": [
         "../shared/src/*"
       ]
     },
