@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@quipu/shared": ["../shared/src/index.ts"],
+      "@quipu/shared/*": ["../shared/src/*"]
+    }
+  },
+  "include": ["src/**/*", "api/**/*", "prisma/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
