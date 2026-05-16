@@ -36,7 +36,7 @@ contract Deploy is Script {
 
         // Logs para .env
         console.log("===========================================");
-        console.log("  Quipu Protocol deployed");
+        console.log("  Yalita Protocol deployed");
         console.log("===========================================");
         console.log("USDC:                  %s", usdc);
         console.log("ScoreRegistry:         %s", address(scoreReg));

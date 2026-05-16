@@ -46,7 +46,11 @@ team1/
 
 - Frontend: [https://yalita.vercel.app](https://yalita.vercel.app)
 - Video: [pendiente - grabar antes del demo day]
-- Contratos en Fuji: [pendiente deploy] (pendiente deploy)
+- Contratos en Fuji:
+  - ScoreRegistry: [https://testnet.snowtrace.io/address/0x<ADDRESS_1>](https://testnet.snowtrace.io/address/0x<ADDRESS_1>)
+  - AttestationRegistry: [https://testnet.snowtrace.io/address/0x<ADDRESS_2>](https://testnet.snowtrace.io/address/0x<ADDRESS_2>)
+  - ScoringEngine: [https://testnet.snowtrace.io/address/0x<ADDRESS_3>](https://testnet.snowtrace.io/address/0x<ADDRESS_3>)
+  - LendingPool: [https://testnet.snowtrace.io/address/0x<ADDRESS_4>](https://testnet.snowtrace.io/address/0x<ADDRESS_4>)
 
 ## 🚀 Setup local
 

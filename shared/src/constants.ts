@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────
-//  Constantes del protocolo Quipu — fuente única de verdad
+//  Constantes del protocolo Yalita — fuente única de verdad
 // ─────────────────────────────────────────────────────────────────
 
 import type { Address } from "./types";
@@ -24,10 +24,10 @@ interface ContractAddresses {
 
 export const CONTRACT_ADDRESSES: Record<number, ContractAddresses> = {
   [CHAIN_IDS.AVALANCHE_FUJI]: {
-    scoreRegistry: "0x0000000000000000000000000000000000000000",
-    attestationRegistry: "0x0000000000000000000000000000000000000000",
-    scoringEngine: "0x0000000000000000000000000000000000000000",
-    lendingPool: "0x0000000000000000000000000000000000000000",
+    scoreRegistry: "0x<ADDRESS_1>",
+    attestationRegistry: "0x<ADDRESS_2>",
+    scoringEngine: "0x<ADDRESS_3>",
+    lendingPool: "0x<ADDRESS_4>",
     // USDC mock en Fuji
     usdc: "0x5425890298aed601595a70AB815c96711a31Bc65",
   },
