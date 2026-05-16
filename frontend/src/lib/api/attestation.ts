@@ -1,5 +1,5 @@
 import { api } from "./client";
-import type { DataSource } from "@quipu/shared";
+import type { DataSource } from "@yalita/shared";
 
 export const attestationApi = {
   requestReclaim: (params: { userAddress: string; providerId: DataSource }) =>

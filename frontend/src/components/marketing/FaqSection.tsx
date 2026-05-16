@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const FAQS = [
   { q: "¿Necesito tener una cuenta bancaria?",
-    a: "No. Quipu fue diseñado para personas sin historial bancario. Solo necesitas tu celular y haber recibido pagos por Tigo Money, SIMPLE u otra app similar." },
+    a: "No. Yalita fue diseñado para personas sin historial bancario. Solo necesitas tu celular y haber recibido pagos por Tigo Money, SIMPLE u otra app similar." },
   { q: "¿Cómo extraen mis datos sin que yo dé acceso?",
     a: "Usamos Reclaim Protocol (zkTLS): vos abrís tu app de Tigo en tu celular y se genera una prueba matemática de tus transacciones sin que nadie vea los datos crudos. Es como mostrar el resultado de una suma sin revelar los números." },
   { q: "¿Cuál es la tasa que voy a pagar?",

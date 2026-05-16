@@ -8,8 +8,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@quipu/shared": ["../shared/src/index.ts"],
-      "@quipu/shared/*": ["../shared/src/*"]
+      "@yalita/shared": ["../shared/src/index.ts"],
+      "@yalita/shared/*": ["../shared/src/*"]
     }
   },
   "include": ["src/**/*", "api/**/*", "prisma/**/*"],

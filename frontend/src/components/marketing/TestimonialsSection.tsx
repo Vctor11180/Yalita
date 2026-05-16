@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 const TESTIMONIALS = [
-  { quote: "El banco me rechazó tres veces. Quipu vio mis 8 años de pagos con Tigo y me dio Bs 5.000 en 10 minutos.",
+  { quote: "El banco me rechazó tres veces. Yalita vio mis 8 años de pagos con Tigo y me dio Bs 5.000 en 10 minutos.",
     name: "María G.", role: "Vendedora de salteñas, La Paz", score: 712, avatar: "MG" },
   { quote: "No tenía cuenta bancaria ni tarjeta. Solo mi celular y mis cobros QR del mercado. Ahora tengo historial.",
     name: "Roberto C.", role: "Ferretero, Cochabamba", score: 684, avatar: "RC" },
@@ -20,7 +20,7 @@ export function TestimonialsSection() {
           className="text-center space-y-4"
         >
           <p className="text-quipu-500 text-sm font-semibold uppercase tracking-wider">Historias reales</p>
-          <h2 className="text-4xl sm:text-5xl font-black">Las personas que Quipu<br /><span className="text-neutral-400">ya está cambiando</span></h2>
+          <h2 className="text-4xl sm:text-5xl font-black">Las personas que Yalita<br /><span className="text-neutral-400">ya está cambiando</span></h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">

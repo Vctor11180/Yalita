@@ -1,8 +1,8 @@
 {
-  "name": "quipu",
+  "name": "yalita",
   "version": "0.1.0",
   "private": true,
-  "description": "Quipu — Decentralized Payment Identity Protocol. Avalanche L1 hackathon project.",
+  "description": "Yalita — Decentralized Payment Identity Protocol. Avalanche L1 hackathon project.",
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=20",
@@ -10,18 +10,18 @@
   },
   "scripts": {
     "dev": "turbo run dev",
-    "dev:frontend": "pnpm --filter @quipu/frontend dev",
-    "dev:backend": "pnpm --filter @quipu/backend dev",
+    "dev:frontend": "pnpm --filter @yalita/frontend dev",
+    "dev:backend": "pnpm --filter @yalita/backend dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "contracts:build": "pnpm --filter @quipu/contracts build",
-    "contracts:test": "pnpm --filter @quipu/contracts test",
-    "contracts:deploy:fuji": "pnpm --filter @quipu/contracts deploy:fuji",
-    "db:generate": "pnpm --filter @quipu/backend db:generate",
-    "db:push": "pnpm --filter @quipu/backend db:push",
-    "db:seed": "pnpm --filter @quipu/backend db:seed",
+    "contracts:build": "pnpm --filter @yalita/contracts build",
+    "contracts:test": "pnpm --filter @yalita/contracts test",
+    "contracts:deploy:fuji": "pnpm --filter @yalita/contracts deploy:fuji",
+    "db:generate": "pnpm --filter @yalita/backend db:generate",
+    "db:push": "pnpm --filter @yalita/backend db:push",
+    "db:seed": "pnpm --filter @yalita/backend db:seed",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {

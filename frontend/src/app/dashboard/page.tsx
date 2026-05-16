@@ -31,7 +31,7 @@ const BANNERS = [
   {
     emoji: "💡",
     title: "Tu historial de pagos ES tu garantía",
-    text: "No necesitas casa, carro ni aval. Si cobras seguido por QR, Quipu lo sabe y te presta a tasa justa.",
+    text: "No necesitas casa, carro ni aval. Si cobras seguido por QR, Yalita lo sabe y te presta a tasa justa.",
     cta: "Ver cómo se calcula →",
     href: "/como-funciona",
     accent: "bg-quipu-primary/10",
@@ -129,7 +129,7 @@ export default function Dashboard() {
             Buenos días, {userName.split(" ")[0]} ☀️
           </h1>
           <p className="text-sm font-medium text-quipu-text/60">
-            Tu billetera Quipu
+            Tu billetera Yalita
           </p>
         </div>
         <button className="relative w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-quipu-text/10 text-quipu-text">
@@ -144,7 +144,7 @@ export default function Dashboard() {
         {/* ─── SALDO PRINCIPAL ─── */}
         <section className="bg-white rounded-2xl p-5 shadow-sm border border-quipu-text/5 animate-fadeInUp">
           <p className="text-xs font-bold text-quipu-text/40 uppercase tracking-wider mb-1">
-            Tu saldo Quipu
+            Tu saldo Yalita
           </p>
           <p className="font-serif text-5xl text-quipu-dark tracking-tight">
             Bs{" "}
@@ -191,7 +191,7 @@ export default function Dashboard() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-bold text-sm text-white flex items-center gap-1">
-                Tu Poder Quipu <ShieldCheck size={14} className="text-quipu-accent" />
+                Tu Poder Yalita <ShieldCheck size={14} className="text-quipu-accent" />
               </p>
               <p className="text-[11px] text-white/60 mt-0.5 leading-tight">
                 Este número es tu llave: a mayor puntaje, podrás pedir préstamos más grandes y baratos.

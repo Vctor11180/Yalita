@@ -24,6 +24,7 @@ interface QuipuState {
   userId: string;
   userName: string;
   userPhone: string;
+  isCiVerified: boolean;
 
   // Wallet
   balanceUsdc: number;
@@ -46,6 +47,7 @@ interface QuipuState {
 
   // ─── IDENTITY ACTIONS ───
   setUserName: (name: string) => void;
+  verifyCi: () => void;
 
   // ─── SCORE ACTIONS ───
   setScore: (score: number) => void;

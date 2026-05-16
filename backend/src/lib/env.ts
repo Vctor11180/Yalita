@@ -20,6 +20,9 @@ const schema = z.object({
   NEXT_PUBLIC_RPC_URL: z.string().url(),
   NEXT_PUBLIC_CHAIN_ID: z.coerce.number().default(43113),
   ORACLE_PRIVATE_KEY: z.string().regex(/^0x[a-fA-F0-9]{64}$/).optional(),
+  WAVY_NODE_API_KEY: z.string().optional(),
+  WAVY_NODE_API_URL: z.string().url().default("https://api.wavynode.com"),
+  WAVY_NODE_MOCK: z.string().default("true"),
 
   NEXT_PUBLIC_SCORE_REGISTRY_ADDRESS: z.string().optional(),
   NEXT_PUBLIC_ATTESTATION_REGISTRY_ADDRESS: z.string().optional(),

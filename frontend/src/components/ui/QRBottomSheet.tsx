@@ -46,7 +46,7 @@ export function QRBottomSheet({ isOpen, onClose, mode }: QRBottomSheetProps) {
   if (!isOpen) return null;
 
   const qrData: Record<string, string> = {
-    type: "quipu_payment",
+    type: "Yalita_payment",
     userId: "user_mock",
     version: "1",
   };
@@ -55,9 +55,9 @@ export function QRBottomSheet({ isOpen, onClose, mode }: QRBottomSheetProps) {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Pago Quipu",
-      text: "Pagame con QR Quipu",
-      url: `https://quipu.app/pay?data=${encodeURIComponent(qrPayload)}`,
+      title: "Pago Yalita",
+      text: "Pagame con QR Yalita",
+      url: `https://Yalita.app/pay?data=${encodeURIComponent(qrPayload)}`,
     };
     if (navigator.share) {
       await navigator.share(shareData);

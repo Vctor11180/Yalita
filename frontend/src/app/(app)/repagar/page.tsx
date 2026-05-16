@@ -34,7 +34,7 @@ export default function RepagarPage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-8">
-      <PageHeader title="Repagar préstamo" description="Cada pago mejora tu Score Quipu automáticamente." />
+      <PageHeader title="Repagar préstamo" description="Cada pago mejora tu Score Yalita automáticamente." />
 
       <Card>
         <div className="flex items-center justify-between mb-4">

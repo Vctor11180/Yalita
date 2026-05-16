@@ -1,6 +1,6 @@
 // Replica del algoritmo de scoring del contrato (para previews off-chain rápidos)
 
-import { SCORE } from "@quipu/shared/constants";
+import { SCORE } from "@yalita/shared/constants";
 
 interface ScoringWeights {
   volume: number;

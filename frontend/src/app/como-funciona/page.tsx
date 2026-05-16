@@ -10,14 +10,14 @@ const STEPS = [
     color: "bg-quipu-primary/10",
     border: "border-quipu-primary/20",
     title: "Conectas tu historial de pagos",
-    text: "Autorizas a Quipu a ver cuánto cobras por QR cada mes. Nada más. No vemos tus contactos, fotos ni contraseñas.",
+    text: "Autorizas a Yalita a ver cuánto cobras por QR cada mes. Nada más. No vemos tus contactos, fotos ni contraseñas.",
   },
   {
     emoji: "⭐",
     color: "bg-quipu-secondary/10",
     border: "border-quipu-secondary/20",
     title: "Calculamos tu puntaje",
-    text: "Miramos cuánto cobras, con qué frecuencia y hace cuánto tiempo. Eso se convierte en tu Puntaje Quipu: un número entre 300 y 850.",
+    text: "Miramos cuánto cobras, con qué frecuencia y hace cuánto tiempo. Eso se convierte en tu Puntaje Yalita: un número entre 300 y 850.",
   },
   {
     emoji: "💰",
@@ -41,7 +41,7 @@ const FAQS = [
     a: "Nos avisas y buscamos una solución juntos. No hay cobros ocultos ni penalizaciones abusivas.",
   },
   {
-    q: "¿Quipu es un banco?",
+    q: "¿Yalita es un banco?",
     a: "No. Somos un protocolo de crédito descentralizado. Eso significa que el dinero viene de otras personas que prestan sus ahorros, no de un banco. Por eso podemos ofrecer mejores tasas.",
   },
   {
@@ -64,7 +64,7 @@ export default function ComoFunciona() {
           <ArrowLeft size={24} />
         </Link>
         <h1 className="font-serif text-2xl text-quipu-dark">
-          Cómo funciona Quipu
+          Cómo funciona Yalita
         </h1>
       </header>
 

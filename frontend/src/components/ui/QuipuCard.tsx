@@ -30,7 +30,7 @@ export function QuipuCard({ name, score, date }: { name: string; score: number; 
 
       <div className="flex justify-between items-start z-10 relative">
         <div>
-          <h3 className="font-serif text-2xl text-quipu-light drop-shadow-md">Quipu</h3>
+          <h3 className="font-serif text-2xl text-quipu-light drop-shadow-md">Yalita</h3>
           <p className="text-xs text-white/80 font-medium tracking-widest mt-1">CERTIFICADO FINANCIERO</p>
         </div>
         <div className="bg-quipu-accent/20 border border-quipu-accent/50 text-quipu-accent text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 backdrop-blur-sm">

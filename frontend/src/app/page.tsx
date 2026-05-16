@@ -40,7 +40,7 @@ export default function SplashPage() {
               </svg>
             </div>
           </div>
-          <h1 className="font-serif text-5xl text-quipu-light text-center mb-4 tracking-tight">Quipu</h1>
+          <h1 className="font-serif text-5xl text-quipu-light text-center mb-4 tracking-tight">Yalita</h1>
         </div>
 
         {/* Tagline */}

@@ -37,7 +37,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-2xl mx-auto text-lg sm:text-xl text-neutral-400 leading-relaxed"
         >
-          Quipu convierte cada pago que hiciste con Tigo Money o SIMPLE en una{" "}
+          Yalita convierte cada pago que hiciste con Tigo Money o SIMPLE en una{" "}
           <span className="text-white font-medium">identidad financiera on-chain</span>.
           Crédito justo en minutos. Sin colateral. Sin banco.
         </motion.p>

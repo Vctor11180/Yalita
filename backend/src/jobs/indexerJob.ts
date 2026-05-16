@@ -4,7 +4,7 @@
 // Para el hackathon es un stub. En producción se reemplaza por Ponder o The Graph.
 
 import { publicClient, contractAddresses } from "../lib/blockchain";
-import { LENDING_POOL_ABI, SCORE_REGISTRY_ABI } from "@quipu/shared";
+import { LENDING_POOL_ABI, SCORE_REGISTRY_ABI } from "@yalita/shared";
 import { db } from "../lib/db";
 import { logger } from "../lib/logger";
 

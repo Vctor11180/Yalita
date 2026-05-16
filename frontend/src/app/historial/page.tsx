@@ -23,7 +23,7 @@ export default function Historial() {
         type: tx.description,
         amount: tx.amountBs,
         date: new Date(tx.timestamp).toLocaleDateString("es-BO", { day: "2-digit", month: "2-digit" }),
-        source: tx.merchant || "Quipu",
+        source: tx.merchant || "Yalita",
         isIncome: tx.type === "loan_received" || tx.type === "qr_received",
       })));
     } else {
@@ -31,7 +31,7 @@ export default function Historial() {
     }
   }, [storeTransactions]);
 
-  const filters = ["Todos", "Quipu", "Tigo Money", "SIMPLE", "Banco Unión"];
+  const filters = ["Todos", "Yalita", "Tigo Money", "SIMPLE", "Banco Unión"];
 
   const filteredTransactions = transactions.filter(t => 
     filter === "Todos" ? true : t.source === filter

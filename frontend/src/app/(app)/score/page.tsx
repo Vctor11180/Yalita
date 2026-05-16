@@ -8,7 +8,7 @@ import { ScoreBreakdown } from "@/components/score/ScoreBreakdown";
 import { Card, Button, Spinner } from "@/components/ui";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { getScoreTier, formatBs, SCORE } from "@quipu/shared";
+import { getScoreTier, formatBs, SCORE } from "@yalita/shared";
 import { cn, formatDate } from "@/lib/utils";
 
 const RANGES = [
@@ -43,7 +43,7 @@ export default function ScorePage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
-      <PageHeader title="Mi Score" description="Tu identidad financiera on-chain en Quipu" />
+      <PageHeader title="Mi Score" description="Tu identidad financiera on-chain en Yalita" />
 
       <Card padding="lg">
         <div className="flex flex-col sm:flex-row items-center gap-8">

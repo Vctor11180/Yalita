@@ -5,20 +5,20 @@ export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) 
   const tasaPrestamista = 0.15; // 15% mensual
   const tasaEmpeno = 0.08; // 8% mensual
   const tasaBanco = 0.045; // 4.5% mensual (típico para microcréditos sin garantía)
-  const tasaQuipu = 0.015; // 1.5% mensual (~18% anual)
+  const tasaYalita = 0.015; // 1.5% mensual (~18% anual)
 
   const calcTotal = (tasa: number) => Math.round(monto + (monto * tasa * plazo));
 
   const totalPrestamistaRaw = calcTotal(tasaPrestamista);
   const totalEmpenoRaw = calcTotal(tasaEmpeno);
   const totalBancoRaw = calcTotal(tasaBanco);
-  const totalQuipuRaw = calcTotal(tasaQuipu);
-  const ahorroRaw = totalPrestamistaRaw - totalQuipuRaw;
+  const totalYalitaRaw = calcTotal(tasaYalita);
+  const ahorroRaw = totalPrestamistaRaw - totalYalitaRaw;
 
   const totalPrestamista = useAnimatedNumber(totalPrestamistaRaw);
   const totalEmpeno = useAnimatedNumber(totalEmpenoRaw);
   const totalBanco = useAnimatedNumber(totalBancoRaw);
-  const totalQuipu = useAnimatedNumber(totalQuipuRaw);
+  const totalYalita = useAnimatedNumber(totalYalitaRaw);
   const ahorro = useAnimatedNumber(ahorroRaw);
 
   return (
@@ -48,7 +48,7 @@ export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) 
             <th className="p-3 text-center bg-quipu-accent/5">
               <div className="flex flex-col items-center">
                 <Zap size={20} className="text-quipu-accent mb-1 fill-quipu-accent/20" />
-                <span className="text-[10px] uppercase tracking-tighter font-bold text-quipu-accent">Quipu</span>
+                <span className="text-[10px] uppercase tracking-tighter font-bold text-quipu-accent">Yalita</span>
               </div>
             </th>
           </tr>
@@ -83,7 +83,7 @@ export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) 
             <td className="p-3 text-center text-amber-700">Bs {totalEmpeno.toLocaleString()}</td>
             <td className="p-3 text-center text-quipu-dark">Bs {totalBanco.toLocaleString()}</td>
             <td className="p-3 text-center text-quipu-accent text-sm bg-quipu-accent/10 border-2 border-quipu-accent/20">
-              Bs {totalQuipu.toLocaleString()}
+              Bs {totalYalita.toLocaleString()}
             </td>
           </tr>
         </tbody>
@@ -91,7 +91,7 @@ export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) 
       <div className="bg-quipu-accent p-3 text-center text-white flex items-center justify-center gap-2">
         <Zap size={16} className="fill-white" />
         <span className="text-xs font-bold uppercase tracking-wide">
-          Ahorras Bs {ahorro.toLocaleString()} con Quipu
+          Ahorras Bs {ahorro.toLocaleString()} con Yalita
         </span>
       </div>
     </div>

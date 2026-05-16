@@ -41,11 +41,11 @@ function SolicitarContent() {
   const faqs = [
     {
       q: "¿Qué pasa si no pago?",
-      a: "Tu puntaje Quipu bajará y se reducirá tu acceso a futuros préstamos. No cobramos penalidades extra, pero sí se notificará a la red de prestamistas.",
+      a: "Tu puntaje Yalita bajará y se reducirá tu acceso a futuros préstamos. No cobramos penalidades extra, pero sí se notificará a la red de prestamistas.",
     },
     {
       q: "¿Cómo se calcula mi tasa?",
-      a: "Tu tasa se basa directamente en tu puntaje Quipu. Mientras más alto tu puntaje (más historial verificado), menor es tu tasa. El 18% anual es la tasa para scores entre 500-700.",
+      a: "Tu tasa se basa directamente en tu puntaje Yalita. Mientras más alto tu puntaje (más historial verificado), menor es tu tasa. El 18% anual es la tasa para scores entre 500-700.",
     },
     {
       q: "¿Puedo pagar antes?",
@@ -155,7 +155,7 @@ function SolicitarContent() {
         <section className="bg-white rounded-2xl p-5 border border-quipu-text/10 shadow-sm">
           <h3 className="font-bold text-quipu-dark mb-2">¿Cómo recibirás el dinero?</h3>
           <p className="text-sm text-quipu-text/70 leading-relaxed">
-            El dinero llega a tu cuenta digital Quipu en segundos. Puedes usarlo directamente
+            El dinero llega a tu cuenta digital Yalita en segundos. Puedes usarlo directamente
             para pagar con tu QR o retirarlo en efectivo en cualquier punto autorizado.
           </p>
         </section>

@@ -1,4 +1,4 @@
-# Arquitectura — Quipu Protocol
+# Arquitectura — Yalita Protocol
 
 ## Vista general
 
@@ -55,7 +55,7 @@
 
 ### shared/
 - Tipos TypeScript + ABIs + constantes
-- Importado por frontend y backend con `@quipu/shared`
+- Importado por frontend y backend con `@yalita/shared`
 
 ## Flujos críticos
 

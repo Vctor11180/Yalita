@@ -49,7 +49,7 @@ export function AppSidebar() {
       <div className="px-5 h-16 flex items-center border-b border-white/5">
         <Link href="/dashboard" className="flex items-center gap-2 font-black text-lg">
           <span className="w-7 h-7 rounded-md bg-quipu-500 flex items-center justify-center text-white text-xs font-black">Q</span>
-          <span className="text-white">Quipu</span>
+          <span className="text-white">Yalita</span>
         </Link>
       </div>
 

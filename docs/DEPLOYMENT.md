@@ -1,4 +1,4 @@
-# Deployment — Quipu
+# Deployment — Yalita
 
 ## Prerrequisitos
 
@@ -81,7 +81,7 @@ pnpm dev
 
 | Error | Solución |
 |-------|----------|
-| `Module not found: @quipu/shared` | `pnpm install` desde root, no desde subproyecto |
+| `Module not found: @yalita/shared` | `pnpm install` desde root, no desde subproyecto |
 | `Privy: invalid app id` | Verificar `NEXT_PUBLIC_PRIVY_APP_ID` en frontend y backend |
 | `Prisma: P1001 can't reach DB` | Activar Neon, copiar `DATABASE_URL` y `DIRECT_URL` |
 | `Foundry: forge not found` | Reiniciar shell o `source ~/.bashrc` |

@@ -1,5 +1,5 @@
 import { db } from "../lib/db";
-import type { Address } from "@quipu/shared";
+import type { Address } from "@yalita/shared";
 
 export class UserService {
   async registerOrGet(input: {

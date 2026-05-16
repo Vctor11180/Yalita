@@ -10,7 +10,7 @@ export const COPY = {
     nft: "Tu certificado de buen pagador",
     signTx: "Confirmar con tu PIN",
     gasFee: "", // oculto en simple
-    score: "Tu puntaje Quipu",
+    score: "Tu puntaje Yalita",
     attestation: "Verificación de pagos",
   },
   advanced: {

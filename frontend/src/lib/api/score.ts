@@ -1,5 +1,5 @@
 import { api } from "./client";
-import type { ScoreTier } from "@quipu/shared";
+import type { ScoreTier } from "@yalita/shared";
 
 export interface ScoreResponse {
   hasScore: boolean;

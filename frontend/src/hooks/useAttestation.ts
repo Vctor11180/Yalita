@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { attestationApi } from "@/lib/api";
 import { useToast } from "./useToast";
 import { useOnboardingStore } from "@/stores";
-import type { DataSource } from "@quipu/shared";
+import type { DataSource } from "@yalita/shared";
 
 export function useRequestReclaim() {
   const { user } = usePrivy();

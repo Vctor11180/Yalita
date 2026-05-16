@@ -9,13 +9,13 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakart
 const dmSerif = DM_Serif_Display({ weight: "400", subsets: ["latin"], variable: "--font-dm-serif" });
 
 export const metadata: Metadata = {
-  title: { default: "Quipu — Decentralized Payment Identity", template: "%s · Quipu" },
+  title: { default: "Yalita — Decentralized Payment Identity", template: "%s · Yalita" },
   description:
     "El primer protocolo que convierte tu historial de pagos QR en crédito justo. Sin banco. Sin colateral. Para los 210M de latinos sin acceso a crédito formal.",
   keywords: ["DPI", "Avalanche", "DeFi", "crédito", "Bolivia", "Latam", "Tigo Money", "zkTLS"],
-  authors: [{ name: "Quipu Team" }],
+  authors: [{ name: "Yalita Team" }],
   openGraph: {
-    title: "Quipu Protocol",
+    title: "Yalita Protocol",
     description: "Crédito justo para los 210M de latinos sin historial bancario.",
     type: "website",
     locale: "es_BO",

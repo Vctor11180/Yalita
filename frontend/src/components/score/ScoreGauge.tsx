@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getScoreTier } from "@quipu/shared";
+import { getScoreTier } from "@yalita/shared";
 
 interface ScoreGaugeProps {
   score: number;

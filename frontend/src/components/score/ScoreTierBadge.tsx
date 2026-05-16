@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui";
-import { getScoreTier } from "@quipu/shared";
+import { getScoreTier } from "@yalita/shared";
 
 interface ScoreTierBadgeProps {
   score: number;

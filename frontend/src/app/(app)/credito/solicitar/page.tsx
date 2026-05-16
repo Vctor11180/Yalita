@@ -69,8 +69,8 @@ export default function SolicitarPage() {
           <LoanComparisonTable
             principalUsdc={principal}
             days={days}
-            quipuTotalDue={BigInt(quote.totalDue)}
-            quipuRateBps={quote.annualRateBps}
+            YalitaTotalDue={BigInt(quote.totalDue)}
+            YalitaRateBps={quote.annualRateBps}
           />
         )}
       </div>
@@ -101,7 +101,7 @@ export default function SolicitarPage() {
             Confirmar y recibir USDC →
           </Button>
           <p className="text-xs text-neutral-600 text-center mt-3">
-            Al confirmar, autorizás el contrato de Quipu en Avalanche.
+            Al confirmar, autorizás el contrato de Yalita en Avalanche.
           </p>
         </div>
       </Card>

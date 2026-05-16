@@ -1,4 +1,4 @@
-// ─── QUIPU WALLET TYPES ───
+// ─── Yalita WALLET TYPES ───
 // All amounts stored in USDC internally, displayed as Bs externally
 // Exchange rate: 1 USD = 6.96 Bs (official Bolivia rate)
 

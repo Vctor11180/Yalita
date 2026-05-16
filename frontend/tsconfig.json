@@ -22,10 +22,10 @@
       "@/*": [
         "./src/*"
       ],
-      "@quipu/shared": [
+      "@yalita/shared": [
         "../shared/src/index.ts"
       ],
-      "@quipu/shared/*": [
+      "@yalita/shared/*": [
         "../shared/src/*"
       ]
     },

@@ -1,8 +1,8 @@
 import { publicClient, contractAddresses } from "../lib/blockchain";
 import { db } from "../lib/db";
-import { SCORE_REGISTRY_ABI, SCORING_ENGINE_ABI, getScoreTier } from "@quipu/shared";
+import { SCORE_REGISTRY_ABI, SCORING_ENGINE_ABI, getScoreTier } from "@yalita/shared";
 import { calculateScore } from "../utils/scoring";
-import type { Address } from "@quipu/shared";
+import type { Address } from "@yalita/shared";
 
 export class ScoreService {
   /** Lee el score on-chain. */
