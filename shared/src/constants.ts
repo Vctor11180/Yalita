@@ -24,10 +24,10 @@ interface ContractAddresses {
 
 export const CONTRACT_ADDRESSES: Record<number, ContractAddresses> = {
   [CHAIN_IDS.AVALANCHE_FUJI]: {
-    scoreRegistry: "0x<ADDRESS_1>",
-    attestationRegistry: "0x<ADDRESS_2>",
-    scoringEngine: "0x<ADDRESS_3>",
-    lendingPool: "0x<ADDRESS_4>",
+    scoreRegistry: "0x0000000000000000000000000000000000000000",
+    attestationRegistry: "0x0000000000000000000000000000000000000000",
+    scoringEngine: "0x0000000000000000000000000000000000000000",
+    lendingPool: "0x0000000000000000000000000000000000000000",
     // USDC mock en Fuji
     usdc: "0x5425890298aed601595a70AB815c96711a31Bc65",
   },
