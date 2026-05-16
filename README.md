@@ -1,8 +1,8 @@
-# Quipu — Decentralized Payment Identity Protocol
+# Yalita — Decentralized Payment Identity Protocol
 
 > _"Hace 600 años los incas registraban deudas y transacciones en nudos de colores sin necesidad de bancos. Hoy lo hacemos con criptografía."_
 
-Quipu convierte el historial de pagos QR de los **210M de latinos sin acceso a crédito formal** en una identidad financiera on-chain verificable. Sin banco. Sin colateral. En 3 minutos desde un celular.
+Yalita convierte el historial de pagos QR de los **210M de latinos sin acceso a crédito formal** en una identidad financiera on-chain verificable. Sin banco. Sin colateral. En 3 minutos desde un celular.
 
 [![Built on Avalanche](https://img.shields.io/badge/Built%20on-Avalanche-E84142?style=flat-square)](https://avax.network)
 [![Hackathon 2026](https://img.shields.io/badge/Hackathon-2026-22c55e?style=flat-square)](#)
@@ -39,7 +39,7 @@ team1/
 ├── contracts/        → Foundry: ScoreRegistry, AttestationRegistry, ScoringEngine, LendingPool
 ├── shared/           → Tipos TypeScript + ABIs compartidos
 ├── docs/             → Arquitectura, deployment, demo script
-└── scripts/          → Generador de datos sintéticos, helpers
+├── scripts/          → Generador de datos sintéticos, helpers
 ```
 
 ## 🚀 Quick start
@@ -75,8 +75,8 @@ pnpm contracts:deploy:fuji
 
 ```bash
 pnpm contracts:test       # Foundry forge test
-pnpm --filter @quipu/backend test
-pnpm --filter @quipu/frontend test
+pnpm --filter @yalita/backend test
+pnpm --filter @yalita/frontend test
 ```
 
 ## 🚢 Deploy
