@@ -29,14 +29,10 @@ app.use(
   "*",
   cors({
     origin: (origin) => {
-      if (!origin) return true; // mismo servidor / mobile apps sin origin
-      const allowed =
-        env.ALLOWED_ORIGIN === "*"
-          ? true
-          : env.ALLOWED_ORIGIN.split(",")
-              .map((s) => s.trim())
-              .includes(origin);
-      return allowed;
+      if (!origin) return origin; // mismo servidor / mobile apps sin origin
+      if (env.ALLOWED_ORIGIN === "*") return origin;
+      const allowed = env.ALLOWED_ORIGIN.split(",").map((s) => s.trim()).includes(origin);
+      return allowed ? origin : null;
     },
     credentials: true,
     allowHeaders: ["Content-Type", "Authorization"],
