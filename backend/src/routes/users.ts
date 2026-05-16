@@ -17,9 +17,20 @@ const registerSchema = z.object({
 
 userRoutes.post("/register", zValidator("json", registerSchema), async (c) => {
   const body = c.req.valid("json");
+  const payload: {
+    walletAddress: `0x${string}`;
+    phoneNumber?: string;
+    email?: string;
+    firstName?: string;
+    ci?: string;
+  } = { walletAddress: body.walletAddress as `0x${string}` };
+  if (body.phoneNumber !== undefined) payload.phoneNumber = body.phoneNumber;
+  if (body.email !== undefined) payload.email = body.email;
+  if (body.firstName !== undefined) payload.firstName = body.firstName;
+  if (body.ci !== undefined) payload.ci = body.ci;
+
   const user = await userService.registerOrGet({
-    ...body,
-    walletAddress: body.walletAddress as `0x${string}`,
+    ...payload,
   });
   return c.json(user);
 });

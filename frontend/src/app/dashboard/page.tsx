@@ -74,7 +74,7 @@ export default function Dashboard() {
 
   const [mounted, setMounted] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
-  const [qrMode, setQrMode] = useState<"cobrar" | "pagar" | undefined>();
+  const [qrMode, setQrMode] = useState<"cobrar" | "pagar_cuota" | "pagar_qr" | undefined>();
   const [bannerIndex, setBannerIndex] = useState(0);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function Dashboard() {
     }
   }, []);
 
-  const openQr = (mode: "cobrar" | "pagar") => {
+  const openQr = (mode: "cobrar" | "pagar_cuota" | "pagar_qr") => {
     setQrMode(mode);
     setQrOpen(true);
   };
@@ -450,10 +450,10 @@ export default function Dashboard() {
       </div>
 
       {/* QR Bottom Sheet */}
-      <QRBottomSheet 
-        isOpen={qrOpen} 
-        onClose={() => setQrOpen(false)} 
-        mode={qrMode as any}
+      <QRBottomSheet
+        isOpen={qrOpen}
+        onClose={() => setQrOpen(false)}
+        {...(qrMode ? { mode: qrMode } : {})}
       />
     </main>
   );

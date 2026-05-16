@@ -7,10 +7,18 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ProviderCard } from "@/components/ui/ProviderCard";
 import { mockProviders } from "@/lib/mock-data";
 
+type ConnectionStatus = "disconnected" | "pending" | "connected";
+type OnboardingProvider = {
+  id: string;
+  name: string;
+  type: string;
+  status: ConnectionStatus;
+};
+
 export default function OnboardingConnect() {
   const router = useRouter();
-  const [providers, setProviders] = useState(
-    mockProviders.map(p => ({ ...p, status: "disconnected" as const }))
+  const [providers, setProviders] = useState<OnboardingProvider[]>(
+    mockProviders.map((p) => ({ ...p, status: "disconnected" })),
   );
 
   const hasConnected = providers.some(p => p.status === "connected");

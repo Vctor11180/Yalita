@@ -2,8 +2,10 @@ import { db } from "../lib/db";
 import { publicClient, walletClient, contractAddresses } from "../lib/blockchain";
 import { LENDING_POOL_ABI } from "@yalita/shared";
 import type { Address, LoanStatus as SharedLoanStatus } from "@yalita/shared";
-import type { LoanStatus, PaymentSource } from "@prisma/client";
 import { WavyNodeService } from "./WavyNodeService";
+
+type LoanStatus = "ACTIVE" | "REPAID" | "OVERDUE" | "DEFAULTED";
+type PaymentSource = "MANUAL" | "AUTO_QR";
 
 export class LoanService {
   private readonly wavyNodeService = new WavyNodeService();

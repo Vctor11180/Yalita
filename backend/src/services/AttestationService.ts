@@ -3,7 +3,13 @@ import { db } from "../lib/db";
 import { ATTESTATION_REGISTRY_ABI, SCORING_ENGINE_ABI } from "@yalita/shared";
 import { generateProofHash } from "../utils/crypto";
 import type { Address, DataSource } from "@yalita/shared";
-import type { DataSource as PrismaDataSource } from "@prisma/client";
+
+type PrismaDataSource =
+  | "TIGO_MONEY"
+  | "SIMPLE_BANK"
+  | "BANCO_UNION"
+  | "BELVO"
+  | "SELF_ATTESTED";
 
 const DATA_SOURCE_TO_ENUM: Record<DataSource, number> = {
   TIGO_MONEY: 0,

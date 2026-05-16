@@ -180,10 +180,10 @@ export const useQuipuStore = create<QuipuState>((set, get) => ({
       description: merchant
         ? `Cobro de ${merchant}`
         : "Cobro de cliente",
-      merchant,
       timestamp: now,
       scoreImpact: 3,
     };
+    if (merchant) tx.merchant = merchant;
 
     const scoreEvt: ScoreEvent = {
       delta: 3,
