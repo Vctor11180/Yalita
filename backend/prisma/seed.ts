@@ -42,19 +42,24 @@ async function main() {
     });
   }
 
-  await db.attestation.create({
-    data: {
-      userId: maria.id,
-      walletAddress,
-      proofHash: `demo_proof_hash_${Date.now()}`,
-      dataSource: "TIGO_MONEY",
-      txCount: 47,
-      totalVolumeBs: 34_500n,
-      monthsCovered: 8,
-      txHashOnChain: "0xdemo_attestation_tx_hash",
-      valid: true,
-    },
+  const existingAttestation = await db.attestation.findFirst({
+    where: { walletAddress, valid: true },
   });
+  if (!existingAttestation) {
+    await db.attestation.create({
+      data: {
+        userId: maria.id,
+        walletAddress,
+        proofHash: "demo_proof_hash_tigo_money",
+        dataSource: "TIGO_MONEY",
+        txCount: 47,
+        totalVolumeBs: 34_500n,
+        monthsCovered: 8,
+        txHashOnChain: "0xdemo_attestation_tx_hash",
+        valid: true,
+      },
+    });
+  }
 
   let activeLoan = await db.loan.findFirst({
     where: { walletAddress, status: "ACTIVE" },
