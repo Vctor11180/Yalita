@@ -25,7 +25,7 @@ export function ComparisonSection() {
           className="text-center space-y-4"
         >
           <p className="text-quipu-500 text-sm font-semibold uppercase tracking-wider">Comparativa</p>
-          <h2 className="text-4xl sm:text-5xl font-black">Quipu vs. las alternativas</h2>
+          <h2 className="text-4xl sm:text-5xl font-black">Yalita vs. las alternativas</h2>
           <p className="text-neutral-400 max-w-xl mx-auto">
             El banco te rechazó. El prestamista te cobra el 180%. Doña María merece una tercera opción.
           </p>
@@ -41,7 +41,7 @@ export function ComparisonSection() {
                 <th className="text-left py-4 pr-4 text-neutral-400 font-medium text-sm w-1/2">Característica</th>
                 <th className="py-4 px-4 text-center text-neutral-400 font-medium text-sm">🏦 Banco</th>
                 <th className="py-4 px-4 text-center text-neutral-400 font-medium text-sm">🦈 Informal</th>
-                <th className="py-4 px-4 text-center font-bold text-sm"><span className="text-quipu-500">✨ Quipu</span></th>
+                <th className="py-4 px-4 text-center font-bold text-sm"><span className="text-quipu-500">✨ Yalita</span></th>
               </tr>
             </thead>
             <tbody>

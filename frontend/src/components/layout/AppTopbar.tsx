@@ -21,7 +21,7 @@ export function AppTopbar() {
 
   return (
     <header className="h-16 flex items-center justify-between px-4 md:px-6 border-b border-white/5 bg-neutral-950/80 backdrop-blur-sm sticky top-0 z-30">
-      <h1 className="text-base font-semibold text-white">{TITLES[pathname] ?? "Quipu"}</h1>
+      <h1 className="text-base font-semibold text-white">{TITLES[pathname] ?? "Yalita"}</h1>
 
       <div className="flex items-center gap-3">
         {wallet && (

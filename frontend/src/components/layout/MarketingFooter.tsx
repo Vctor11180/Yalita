@@ -26,7 +26,7 @@ export function MarketingFooter() {
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-2 font-black text-xl">
               <span className="w-8 h-8 rounded-lg bg-quipu-500 flex items-center justify-center text-white text-sm font-black">Q</span>
-              <span className="text-white">Quipu</span>
+              <span className="text-white">Yalita</span>
             </Link>
             <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">
               La capa de identidad financiera para los 210M de latinos sin historial bancario.
@@ -51,7 +51,7 @@ export function MarketingFooter() {
         </div>
 
         <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
-          <p>© 2026 Quipu Protocol. Todos los derechos reservados.</p>
+          <p>© 2026 Yalita Protocol. Todos los derechos reservados.</p>
           <p>Avalanche Hackathon 2026 — DPI Track</p>
         </div>
       </div>

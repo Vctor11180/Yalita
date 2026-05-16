@@ -40,13 +40,14 @@ export default function SplashPage() {
               </svg>
             </div>
           </div>
-          <h1 className="font-serif text-5xl text-quipu-light text-center mb-4 tracking-tight">Quipu</h1>
+          <h1 className="font-serif text-5xl text-quipu-light text-center mb-4 tracking-tight">Yalita</h1>
         </div>
 
         {/* Tagline */}
-        <p className="text-quipu-light/80 text-center text-lg max-w-[260px] animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
-          Tu historial vale más que lo que el banco cree
-        </p>
+        <div className="text-center animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
+          <p className="text-quipu-light/90 text-lg font-medium max-w-[280px]">Tu reputación es tu mayor activo</p>
+          <p className="text-quipu-light/50 text-sm mt-2">Rápido, simple y justo</p>
+        </div>
       </div>
 
       <div className="w-full max-w-sm z-10 flex flex-col space-y-4 animate-fadeInUp" style={{ animationDelay: "0.8s" }}>

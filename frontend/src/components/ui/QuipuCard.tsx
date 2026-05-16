@@ -1,12 +1,13 @@
 export function QuipuCard({ name, score, date }: { name: string; score: number; date: string }) {
   return (
     <div 
-      className="relative w-full aspect-[1.6/1] overflow-hidden p-6 flex flex-col justify-between text-white"
+      className="relative w-full aspect-[1.6/1] overflow-hidden p-6 flex flex-col justify-between"
       style={{
         borderRadius: "16px",
         boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
-        border: "1px solid #F39C12",
-        backgroundColor: "#1A1A2E"
+        border: "1px solid var(--y-amber)",
+        backgroundColor: "var(--y-card-dark)",
+        color: "var(--y-text-on-dark)",
       }}
     >
       {/* Patrón Andino SVG */}
@@ -14,26 +15,32 @@ export function QuipuCard({ name, score, date }: { name: string; score: number; 
         <svg width="100%" height="100%">
           <defs>
             <pattern id="andean-pattern" width="24" height="16" patternUnits="userSpaceOnUse">
-              <path d="M6 0 L12 4 L6 8 L0 4 Z" fill="#C0392B" />
-              <path d="M18 0 L24 4 L18 8 L12 4 Z" fill="#F39C12" />
-              <path d="M0 8 L6 12 L0 16 L-6 12 Z" fill="#F39C12" />
-              <path d="M12 8 L18 12 L12 16 L6 12 Z" fill="#C0392B" />
-              <path d="M24 8 L30 12 L24 16 L18 12 Z" fill="#F39C12" />
+              <path d="M6 0 L12 4 L6 8 L0 4 Z" fill="var(--y-primary)" />
+              <path d="M18 0 L24 4 L18 8 L12 4 Z" fill="var(--y-amber)" />
+              <path d="M0 8 L6 12 L0 16 L-6 12 Z" fill="var(--y-amber)" />
+              <path d="M12 8 L18 12 L12 16 L6 12 Z" fill="var(--y-primary)" />
+              <path d="M24 8 L30 12 L24 16 L18 12 Z" fill="var(--y-amber)" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#andean-pattern)" />
         </svg>
       </div>
 
-      {/* Gradiente sutil encima del patrón para legibilidad */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A2E]/80 via-[#1A1A2E]/50 to-[#2D1B69]/80 pointer-events-none"></div>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(30,34,53,0.8), rgba(30,34,53,0.5), rgba(45,27,105,0.8))" }}></div>
 
       <div className="flex justify-between items-start z-10 relative">
         <div>
-          <h3 className="font-serif text-2xl text-quipu-light drop-shadow-md">Quipu</h3>
-          <p className="text-xs text-white/80 font-medium tracking-widest mt-1">CERTIFICADO FINANCIERO</p>
+          <h3 className="font-serif text-2xl drop-shadow-md" style={{ color: "var(--y-text-on-dark)" }}>Yalita</h3>
+          <p className="text-xs font-medium tracking-widest mt-1" style={{ color: "rgba(255,255,255,0.8)" }}>Tu reputación es tu mayor activo</p>
         </div>
-        <div className="bg-quipu-accent/20 border border-quipu-accent/50 text-quipu-accent text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 backdrop-blur-sm">
+        <div
+          className="text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 backdrop-blur-sm"
+          style={{
+            background: "rgba(44,180,98,0.2)",
+            border: "1px solid rgba(44,180,98,0.5)",
+            color: "var(--y-green)",
+          }}
+        >
           <span>Verificado</span>
           <span>✓</span>
         </div>
@@ -41,13 +48,13 @@ export function QuipuCard({ name, score, date }: { name: string; score: number; 
 
       <div className="flex justify-between items-end z-10 relative">
         <div>
-          <p className="text-xs text-white/60 mb-1">TITULAR</p>
+          <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>TITULAR</p>
           <p className="font-medium text-lg tracking-wide drop-shadow-sm">{name.toUpperCase()}</p>
-          <p className="text-[10px] text-white/50 mt-1">EMISIÓN: {date}</p>
+          <p className="text-[10px] mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>EMISIÓN: {date}</p>
         </div>
         <div className="text-right">
-          <p className="text-xs text-white/60 mb-1">SCORE</p>
-          <p className="font-serif text-4xl text-quipu-secondary drop-shadow-[0_0_10px_rgba(243,156,18,0.5)]">{score}</p>
+          <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>SCORE</p>
+          <p className="font-lora text-4xl" style={{ color: "var(--y-amber)", filter: "drop-shadow(0 0 10px rgba(245,158,11,0.5))" }}>{score}</p>
         </div>
       </div>
     </div>

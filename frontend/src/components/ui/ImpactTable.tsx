@@ -1,11 +1,11 @@
 import { useAnimatedNumber } from "@/hooks/useAnimatedNumber";
-import { Users, Watch, Landmark, Zap, ShieldCheck, Clock } from "lucide-react";
+import { Users, Watch, Landmark, Zap, ShieldCheck } from "lucide-react";
 
 export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) {
-  const tasaPrestamista = 0.15; // 15% mensual
-  const tasaEmpeno = 0.08; // 8% mensual
-  const tasaBanco = 0.045; // 4.5% mensual (típico para microcréditos sin garantía)
-  const tasaQuipu = 0.015; // 1.5% mensual (~18% anual)
+  const tasaPrestamista = 0.15;
+  const tasaEmpeno = 0.08;
+  const tasaBanco = 0.045;
+  const tasaQuipu = 0.015;
 
   const calcTotal = (tasa: number) => Math.round(monto + (monto * tasa * plazo));
 
@@ -22,78 +22,84 @@ export function ImpactTable({ monto, plazo }: { monto: number; plazo: number }) 
   const ahorro = useAnimatedNumber(ahorroRaw);
 
   return (
-    <div className="bg-white rounded-2xl border border-quipu-text/10 overflow-hidden shadow-sm animate-fadeIn">
+    <div
+      className="rounded-2xl overflow-hidden shadow-sm animate-fadeIn"
+      style={{ background: "var(--y-surface)", border: "1px solid var(--y-border)" }}
+    >
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="bg-quipu-light/30 border-b border-quipu-text/10">
+          <tr style={{ background: "var(--y-surface-alt)", borderBottom: "1px solid var(--y-border)" }}>
             <th className="p-3"></th>
             <th className="p-3 text-center">
               <div className="flex flex-col items-center">
-                <Users size={18} className="text-red-500 mb-1" />
-                <span className="text-[10px] uppercase tracking-tighter font-bold text-red-600">Prestamista</span>
+                <Users size={18} style={{ color: "var(--y-text-secondary)" }} className="mb-1" />
+                <span className="text-[10px] uppercase tracking-tighter font-bold" style={{ color: "var(--y-text-secondary)" }}>Prestamista</span>
               </div>
             </th>
             <th className="p-3 text-center">
               <div className="flex flex-col items-center">
-                <Watch size={18} className="text-amber-600 mb-1" />
-                <span className="text-[10px] uppercase tracking-tighter font-bold text-amber-700">Empeño</span>
+                <Watch size={18} style={{ color: "var(--y-text-tertiary)" }} className="mb-1" />
+                <span className="text-[10px] uppercase tracking-tighter font-bold" style={{ color: "var(--y-text-tertiary)" }}>Empeño</span>
               </div>
             </th>
             <th className="p-3 text-center">
               <div className="flex flex-col items-center">
-                <Landmark size={18} className="text-quipu-dark mb-1" />
-                <span className="text-[10px] uppercase tracking-tighter font-bold text-quipu-dark">Bancos</span>
+                <Landmark size={18} style={{ color: "var(--y-text-primary)" }} className="mb-1" />
+                <span className="text-[10px] uppercase tracking-tighter font-bold" style={{ color: "var(--y-text-primary)" }}>Bancos</span>
               </div>
             </th>
-            <th className="p-3 text-center bg-quipu-accent/5">
+            <th className="p-3 text-center rounded-t-lg" style={{ background: "var(--y-primary)" }}>
               <div className="flex flex-col items-center">
-                <Zap size={20} className="text-quipu-accent mb-1 fill-quipu-accent/20" />
-                <span className="text-[10px] uppercase tracking-tighter font-bold text-quipu-accent">Quipu</span>
+                <Zap size={20} className="mb-1" style={{ color: "var(--y-text-on-primary)", fill: "rgba(var(--y-aqua-rgb), 0.3)" }} />
+                <span className="text-[10px] uppercase tracking-tighter font-bold" style={{ color: "var(--y-text-on-primary)" }}>⚡ Yalita</span>
               </div>
             </th>
           </tr>
         </thead>
         <tbody className="text-[11px] font-medium">
-          <tr className="border-b border-quipu-text/5">
-            <td className="p-3 text-quipu-text/60">Tasa mensual</td>
-            <td className="p-3 text-center text-red-500">15.0%</td>
-            <td className="p-3 text-center text-amber-600">8.0%</td>
-            <td className="p-3 text-center text-quipu-dark">4.5%</td>
-            <td className="p-3 text-center font-bold text-quipu-accent bg-quipu-accent/5">1.5%</td>
+          <tr style={{ borderBottom: "1px solid var(--y-border)" }}>
+            <td className="p-3" style={{ color: "var(--y-text-secondary)" }}>Tasa mensual</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>15.0%</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>8.0%</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>4.5%</td>
+            <td className="p-3 text-center font-bold" style={{ color: "var(--y-green)", background: "rgba(44,180,98,0.05)", borderLeft: "1px solid var(--y-border)", borderRight: "1px solid var(--y-border)" }}>1.5%</td>
           </tr>
-          <tr className="border-b border-quipu-text/5">
-            <td className="p-3 text-quipu-text/60">Tiempo espera</td>
-            <td className="p-3 text-center">Hoy mismo</td>
-            <td className="p-3 text-center">Hoy mismo</td>
-            <td className="p-3 text-center">7-15 días</td>
-            <td className="p-3 text-center font-bold text-quipu-accent bg-quipu-accent/5">1 min</td>
+          <tr style={{ borderBottom: "1px solid var(--y-border)" }}>
+            <td className="p-3" style={{ color: "var(--y-text-secondary)" }}>Tiempo espera</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>Hoy mismo</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>Hoy mismo</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>7-15 días</td>
+            <td className="p-3 text-center font-bold" style={{ color: "var(--y-green)", background: "rgba(44,180,98,0.05)", borderLeft: "1px solid var(--y-border)", borderRight: "1px solid var(--y-border)" }}>1 min</td>
           </tr>
-          <tr className="border-b border-quipu-text/5">
-            <td className="p-3 text-quipu-text/60 flex items-center gap-1">
+          <tr style={{ borderBottom: "1px solid var(--y-border)" }}>
+            <td className="p-3 flex items-center gap-1" style={{ color: "var(--y-text-secondary)" }}>
               <ShieldCheck size={12} /> Seguridad
             </td>
-            <td className="p-3 text-center text-red-500">Baja</td>
-            <td className="p-3 text-center text-amber-600">Media</td>
-            <td className="p-3 text-center">Alta</td>
-            <td className="p-3 text-center font-bold text-quipu-accent bg-quipu-accent/5">Alta</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>Baja</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>Media</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-primary)" }}>Alta</td>
+            <td className="p-3 text-center font-bold" style={{ color: "var(--y-green)", background: "rgba(44,180,98,0.05)", borderLeft: "1px solid var(--y-border)", borderRight: "1px solid var(--y-border)" }}>Alta</td>
           </tr>
-          <tr className="font-bold bg-quipu-light/20">
-            <td className="p-3 text-quipu-dark text-sm">Pagas en total</td>
-            <td className="p-3 text-center text-red-600">Bs {totalPrestamista.toLocaleString()}</td>
-            <td className="p-3 text-center text-amber-700">Bs {totalEmpeno.toLocaleString()}</td>
-            <td className="p-3 text-center text-quipu-dark">Bs {totalBanco.toLocaleString()}</td>
-            <td className="p-3 text-center text-quipu-accent text-sm bg-quipu-accent/10 border-2 border-quipu-accent/20">
-              Bs {totalQuipu.toLocaleString()}
+          <tr className="font-bold" style={{ background: "var(--y-surface-alt)" }}>
+            <td className="p-3 text-sm" style={{ color: "var(--y-text-primary)" }}>Pagas en total</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-secondary)" }}>Bs {totalPrestamista.toLocaleString()}</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-secondary)" }}>Bs {totalEmpeno.toLocaleString()}</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-secondary)" }}>Bs {totalBanco.toLocaleString()}</td>
+            <td className="p-3 text-center text-lg" style={{ color: "var(--y-green)", background: "rgba(44,180,98,0.05)", borderLeft: "1px solid var(--y-green)", borderRight: "1px solid var(--y-green)", boxShadow: "0 0 0 1px var(--y-green)" }}>
+              Bs {totalQuipu.toLocaleString()} ✨
+            </td>
+          </tr>
+          <tr style={{ background: "var(--y-green-light)" }}>
+            <td className="p-3 font-bold text-sm" style={{ color: "var(--y-text-primary)" }}>Ahorras con Yalita</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-tertiary)" }}>—</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-tertiary)" }}>—</td>
+            <td className="p-3 text-center" style={{ color: "var(--y-text-tertiary)" }}>—</td>
+            <td className="p-3 text-center font-bold text-lg rounded-b-lg" style={{ color: "var(--y-green)", background: "rgba(44,180,98,0.05)", borderLeft: "1px solid var(--y-green)", borderRight: "1px solid var(--y-green)" }}>
+              ⚡ Bs {ahorro.toLocaleString()}
             </td>
           </tr>
         </tbody>
       </table>
-      <div className="bg-quipu-accent p-3 text-center text-white flex items-center justify-center gap-2">
-        <Zap size={16} className="fill-white" />
-        <span className="text-xs font-bold uppercase tracking-wide">
-          Ahorras Bs {ahorro.toLocaleString()} con Quipu
-        </span>
-      </div>
     </div>
   );
 }

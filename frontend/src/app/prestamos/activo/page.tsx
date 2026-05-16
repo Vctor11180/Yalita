@@ -105,8 +105,8 @@ export default function PrestamoActivo() {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Pago Quipu",
-      text: `Pagame con QR Quipu — ${userName}`,
+      title: "Pago Yalita",
+      text: `Pagame con QR Yalita — ${userName}`,
       url: `https://quipu.app/pay?data=${encodeURIComponent(qrPayload)}`,
     };
     if (navigator.share) {
@@ -200,7 +200,7 @@ export default function PrestamoActivo() {
           style={{ animationDelay: "0.1s" }}
         >
           <h3 className="font-bold text-quipu-dark text-lg mb-1">
-            Cobra con tu QR Quipu
+            Cobra con tu QR Yalita
           </h3>
           <p className="text-sm text-quipu-text/60 mb-6 leading-relaxed">
             Cada vez que cobres, parte de tu ingreso se destina automáticamente

@@ -39,32 +39,33 @@ export function ScoreGauge({ score }: { score: number }) {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-48 h-48 mx-auto">
-      <svg className="w-full h-full transform -rotate-90 drop-shadow-[0_0_8px_#F39C12]" viewBox="0 0 100 100">
+      <svg className="w-full h-full transform -rotate-90 score-glow" viewBox="0 0 100 100">
         <circle
           cx="50"
           cy="50"
           r="45"
-          className="stroke-quipu-light/20"
           strokeWidth="8"
           fill="transparent"
+          style={{ stroke: "var(--y-border)" }}
         />
         <circle
           cx="50"
           cy="50"
           r="45"
-          className="stroke-quipu-secondary transition-all duration-75 ease-linear"
+          className="transition-all duration-75 ease-linear"
           strokeWidth="8"
           fill="transparent"
           strokeDasharray={strokeDasharray}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
+          style={{ stroke: "var(--y-aqua)" }}
         />
       </svg>
       <div className="absolute flex flex-col items-center justify-center animate-score-reveal">
-        <span className="font-serif text-6xl text-quipu-secondary tracking-tighter">
+        <span className="font-lora text-6xl tracking-tighter" style={{ color: "var(--y-aqua)" }}>
           {animatedScore === 0 ? "-" : animatedScore}
         </span>
-        <span className="text-xs text-quipu-light/80 mt-1">Tu puntaje financiero</span>
+        <span className="text-xs mt-1" style={{ color: "var(--y-text-on-dark-muted)" }}>Tu puntaje financiero</span>
       </div>
     </div>
   );

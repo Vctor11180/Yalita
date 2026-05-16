@@ -43,7 +43,7 @@ export default function ScorePage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
-      <PageHeader title="Mi Score" description="Tu identidad financiera on-chain en Quipu" />
+      <PageHeader title="Mi Score" description="Tu identidad financiera on-chain en Yalita" />
 
       <Card padding="lg">
         <div className="flex flex-col sm:flex-row items-center gap-8">

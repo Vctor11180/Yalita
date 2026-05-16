@@ -55,8 +55,8 @@ export function QRBottomSheet({ isOpen, onClose, mode }: QRBottomSheetProps) {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Pago Quipu",
-      text: "Pagame con QR Quipu",
+      title: "Pago Yalita",
+      text: "Pagame con QR Yalita",
       url: `https://quipu.app/pay?data=${encodeURIComponent(qrPayload)}`,
     };
     if (navigator.share) {

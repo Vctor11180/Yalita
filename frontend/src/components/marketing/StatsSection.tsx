@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const STATS = [
   { value: "210M", label: "personas sin acceso a crédito formal en Latam" },
   { value: "180%", label: "tasa anual promedio del prestamista informal" },
-  { value: "3 min", label: "tiempo para obtener tu Score Quipu" },
+  { value: "3 min", label: "tiempo para obtener tu Score Yalita" },
   { value: "$5K", label: "límite máximo de crédito en la primera solicitud" },
 ];
 

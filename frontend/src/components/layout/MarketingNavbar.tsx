@@ -19,7 +19,7 @@ export function MarketingNavbar() {
       <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-8">
         <Link href="/" className="flex items-center gap-2 font-black text-xl">
           <span className="w-8 h-8 rounded-lg bg-quipu-500 flex items-center justify-center text-white text-sm font-black">Q</span>
-          <span className="text-white">Quipu</span>
+          <span className="text-white">Yalita</span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-1">

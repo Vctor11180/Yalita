@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { QRBottomSheet } from "@/components/ui/QRBottomSheet";
 import { Bell, ArrowRight, CreditCard, ShieldCheck } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import Link from "next/link";
 import { useQuipuStore } from "@/stores/quipu.store";
 
@@ -31,10 +32,9 @@ const BANNERS = [
   {
     emoji: "💡",
     title: "Tu historial de pagos ES tu garantía",
-    text: "No necesitas casa, carro ni aval. Si cobras seguido por QR, Quipu lo sabe y te presta a tasa justa.",
+    text: "No necesitas casa, carro ni aval. Si cobras seguido por QR, Yalita lo sabe y te presta a tasa justa.",
     cta: "Ver cómo se calcula →",
     href: "/como-funciona",
-    accent: "bg-quipu-primary/10",
   },
   {
     emoji: "📱",
@@ -42,7 +42,6 @@ const BANNERS = [
     text: "Tu cliente escanea tu código y te paga en segundos. Sin efectivo, sin vuelto, sin riesgo.",
     cta: "Ver mi QR →",
     href: "__qr__",
-    accent: "bg-quipu-secondary/10",
   },
   {
     emoji: "🔄",
@@ -50,7 +49,6 @@ const BANNERS = [
     text: "Cuando activas el repago automático, un pequeño porcentaje de cada cobro QR se descuenta de tu cuota.",
     cta: "Activar repago automático →",
     href: "/prestamos/activo",
-    accent: "bg-quipu-accent/10",
   },
   {
     emoji: "🔒",
@@ -58,7 +56,6 @@ const BANNERS = [
     text: "Solo vemos qué tanto cobras, no a quién ni qué vendes. Tú controlas tu información en todo momento.",
     cta: "Leer más →",
     href: "/como-funciona",
-    accent: "bg-blue-100",
   },
 ];
 
@@ -101,7 +98,7 @@ export default function Dashboard() {
     setQrOpen(true);
   };
 
-  if (!mounted) return <div className="bg-quipu-light min-h-screen" />;
+  if (!mounted) return <div style={{ background: "var(--y-bg)" }} className="min-h-screen" />;
 
   const balanceBs = getBalanceBs();
   const hasActiveLoan = activeLoan && activeLoan.status === "active";
@@ -121,51 +118,86 @@ export default function Dashboard() {
     : 0;
 
   return (
-    <main className="bg-quipu-light min-h-screen pb-24">
+    <main style={{ background: "var(--y-bg)" }} className="min-h-screen pb-24">
       {/* ─── HEADER ─── */}
-      <header className="flex justify-between items-center p-6 bg-white/50 backdrop-blur-md sticky top-0 z-10 border-b border-quipu-text/5">
+      <header
+        className="flex justify-between items-center p-6 backdrop-blur-md sticky top-0 z-10"
+        style={{
+          background: "color-mix(in srgb, var(--y-surface) 80%, transparent)",
+          borderBottom: "1px solid var(--y-border)",
+        }}
+      >
         <div>
-          <h1 className="font-serif text-2xl text-quipu-dark">
+          <h1 className="font-serif text-2xl" style={{ color: "var(--y-text-primary)" }}>
             Buenos días, {userName.split(" ")[0]} ☀️
           </h1>
-          <p className="text-sm font-medium text-quipu-text/60">
-            Tu billetera Quipu
+          <p className="text-sm font-medium" style={{ color: "var(--y-text-secondary)" }}>
+            Tu billetera Yalita
           </p>
         </div>
-        <button className="relative w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-quipu-text/10 text-quipu-text">
-          <Bell size={20} />
-          {transactions.length > 0 && (
-            <span className="absolute top-2 right-2 w-2 h-2 bg-quipu-primary rounded-full border-2 border-white" />
-          )}
-        </button>
+        <div className="flex items-center space-x-2">
+          <ThemeToggle />
+          <button
+            className="relative w-10 h-10 flex items-center justify-center rounded-full shadow-sm"
+            style={{
+              background: "var(--y-surface)",
+              border: "1px solid var(--y-border)",
+              color: "var(--y-text-primary)",
+            }}
+          >
+            <Bell size={20} />
+            {transactions.length > 0 && (
+              <span
+                className="absolute top-2 right-2 w-2 h-2 rounded-full border-2"
+                style={{
+                  background: "var(--y-primary)",
+                  borderColor: "var(--y-surface)",
+                }}
+              />
+            )}
+          </button>
+        </div>
       </header>
 
       <div className="p-6 space-y-5">
         {/* ─── SALDO PRINCIPAL ─── */}
-        <section className="bg-white rounded-2xl p-5 shadow-sm border border-quipu-text/5 animate-fadeInUp">
-          <p className="text-xs font-bold text-quipu-text/40 uppercase tracking-wider mb-1">
-            Tu saldo Quipu
+        <section
+          className="rounded-2xl p-5 shadow-sm animate-fadeInUp"
+          style={{
+            background: "var(--y-surface)",
+            border: "1px solid var(--y-border)",
+          }}
+        >
+          <p
+            className="text-xs font-bold uppercase tracking-wider mb-1"
+            style={{ color: "var(--y-text-tertiary)" }}
+          >
+            Tu saldo Yalita
           </p>
-          <p className="font-serif text-5xl text-quipu-dark tracking-tight">
+          <p
+            className="font-lora text-5xl tracking-tight"
+            style={{ color: "var(--y-text-primary)" }}
+          >
             Bs{" "}
             {balanceBs.toLocaleString("es-BO", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </p>
-          <p className="text-xs text-quipu-text/30 mt-1">
+          <p className="text-xs mt-1" style={{ color: "var(--y-text-tertiary)" }}>
             ≈ {balanceUsdc.toFixed(2)} USDC
           </p>
           <div className="flex items-center mt-3 space-x-2">
             {balanceBs > 0 ? (
-              <span className="text-[10px] font-bold text-quipu-accent flex items-center space-x-1">
-                <span className="w-1.5 h-1.5 bg-quipu-accent rounded-full" />
+              <span className="text-[10px] font-bold flex items-center space-x-1" style={{ color: "var(--y-green)" }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--y-green)" }} />
                 <span>Activo</span>
               </span>
             ) : !activeLoan ? (
               <Link
                 href="/prestamos/calculadora"
-                className="text-xs font-bold text-quipu-primary"
+                className="text-xs font-bold"
+                style={{ color: "var(--y-primary)" }}
               >
                 Pide tu primer préstamo →
               </Link>
@@ -175,37 +207,52 @@ export default function Dashboard() {
 
         {/* ─── SCORE COMPACTO ─── */}
         <section
-          className="rounded-2xl p-4 text-white relative overflow-hidden animate-fadeInUp shadow-lg"
+          className="rounded-2xl p-4 relative overflow-hidden animate-fadeInUp shadow-lg"
           style={{
-            backgroundImage:
-              "linear-gradient(135deg, #1A1A2E 0%, #2D1B69 100%)",
+            background: `linear-gradient(135deg, var(--y-card-dark) 0%, var(--y-navy) 100%)`,
             animationDelay: "0.1s",
           }}
         >
+          {/* On-chain badge */}
+          <div className="absolute top-3 right-3 flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--y-green)" }} />
+            <span className="text-[10px] font-medium" style={{ color: "var(--y-text-on-dark-muted)" }}>On-chain</span>
+          </div>
           <div className="flex items-center space-x-4">
             {/* Mini score */}
-            <div className="w-16 h-16 rounded-full border-[3px] border-quipu-secondary flex items-center justify-center shrink-0 bg-white/5 shadow-[0_0_15px_rgba(243,156,18,0.2)]">
-              <span className="font-serif text-2xl text-quipu-secondary">
+            <div
+              className="w-16 h-16 rounded-full border-[3px] flex items-center justify-center shrink-0"
+              style={{
+                borderColor: "var(--y-aqua)",
+                background: "rgba(255,255,255,0.05)",
+                boxShadow: "0 0 15px rgba(var(--y-aqua-rgb), 0.2)",
+              }}
+            >
+              <span className="font-lora text-2xl" style={{ color: "var(--y-aqua)" }}>
                 {score}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm text-white flex items-center gap-1">
-                Tu Poder Quipu <ShieldCheck size={14} className="text-quipu-accent" />
+              <p className="font-bold text-sm flex items-center gap-1" style={{ color: "var(--y-text-on-dark)" }}>
+                Tu Poder Yalita <ShieldCheck size={14} style={{ color: "var(--y-green)" }} />
               </p>
-              <p className="text-[11px] text-white/60 mt-0.5 leading-tight">
+              <p className="text-[11px] mt-0.5 leading-tight" style={{ color: "var(--y-text-on-dark-muted)" }}>
                 Este número es tu llave: a mayor puntaje, podrás pedir préstamos más grandes y baratos.
               </p>
               <div className="flex items-center justify-between mt-2">
-                <p className="text-xs text-white/50">
-                  Crédito:{" "}
-                  <span className="text-quipu-secondary font-bold">
+                <p className="text-xs" style={{ color: "var(--y-text-on-dark-muted)" }}>
+                  ⚡ Crédito disponible:{" "}
+                  <span className="font-bold" style={{ color: "var(--y-aqua)" }}>
                     Bs {availableCreditBs.toLocaleString()}
                   </span>
                 </p>
                 <Link
                   href="/como-funciona"
-                  className="text-[10px] bg-white/10 px-2 py-1 rounded-lg text-quipu-secondary font-bold hover:bg-white/20 transition-all"
+                  className="text-[10px] px-2 py-1 rounded-lg font-bold hover:opacity-80 transition-all"
+                  style={{
+                    background: "rgba(255,255,255,0.1)",
+                    color: "var(--y-aqua)",
+                  }}
                 >
                   Subir mi límite →
                 </Link>
@@ -217,49 +264,52 @@ export default function Dashboard() {
         {/* ─── ACTIVE LOAN CARD (conditional) ─── */}
         {hasActiveLoan && (
           <section
-            className="rounded-2xl p-5 text-white relative overflow-hidden animate-fadeInUp"
+            className="rounded-2xl p-5 relative overflow-hidden animate-fadeInUp"
             style={{
-              backgroundImage:
-                "linear-gradient(135deg, #1A1A2E 0%, #2D1B69 100%)",
+              background: `linear-gradient(135deg, var(--y-card-dark) 0%, var(--y-navy) 100%)`,
             }}
           >
             <div className="flex justify-between items-start mb-3">
-              <p className="text-xs font-medium text-white/50 uppercase tracking-wider">
+              <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--y-text-on-dark-muted)" }}>
                 Tu préstamo activo
               </p>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-quipu-accent/20 text-quipu-accent">
+              <span
+                className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                style={{
+                  background: "rgba(44,180,98,0.2)",
+                  color: "var(--y-green)",
+                }}
+              >
                 Al día ✓
               </span>
             </div>
 
-            <p className="font-serif text-3xl text-quipu-secondary mb-1">
+            <p className="font-lora text-3xl mb-1" style={{ color: "var(--y-amber)" }}>
               Bs {activeLoan!.monthlyPaymentBs.toLocaleString()}
             </p>
-            <p className="text-sm text-white/60 mb-4">
+            <p className="text-sm mb-4" style={{ color: "var(--y-text-on-dark-muted)" }}>
               próxima cuota · vence en {daysUntilDue} días
             </p>
 
             <div className="flex items-center space-x-3 mb-4">
-              <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
                 <div
-                  className="h-full bg-quipu-accent rounded-full transition-all duration-700"
+                  className="h-full rounded-full transition-all duration-700"
                   style={{
-                    width: `${
-                      (activeLoan!.paidInstallments /
-                        activeLoan!.termMonths) *
-                      100
-                    }%`,
+                    width: `${(activeLoan!.paidInstallments / activeLoan!.termMonths) * 100}%`,
+                    background: "var(--y-green)",
                   }}
                 />
               </div>
-              <span className="text-xs font-bold text-white/70">
+              <span className="text-xs font-bold" style={{ color: "var(--y-text-on-dark-muted)" }}>
                 {activeLoan!.paidInstallments}/{activeLoan!.termMonths}
               </span>
             </div>
 
             <button
               onClick={() => openQr("pagar_cuota")}
-              className="w-full py-2.5 bg-white/10 hover:bg-white/20 transition-colors rounded-xl text-sm font-semibold flex items-center justify-center space-x-2 active:scale-[0.97]"
+              className="w-full py-2.5 hover:opacity-80 transition-colors rounded-xl text-sm font-semibold flex items-center justify-center space-x-2 active:scale-[0.97]"
+              style={{ background: "rgba(255,255,255,0.1)", color: "var(--y-text-on-dark)" }}
             >
               <CreditCard size={16} />
               <span>Pagar ahora</span>
@@ -269,7 +319,7 @@ export default function Dashboard() {
 
         {/* ─── ACTION BUTTONS 2×2 ─── */}
         <section>
-          <h2 className="text-lg font-bold text-quipu-dark mb-4">
+          <h2 className="text-lg font-bold mb-4" style={{ color: "var(--y-text-primary)" }}>
             ¿Qué quieres hacer?
           </h2>
           <div className="grid grid-cols-2 gap-3">
@@ -277,11 +327,11 @@ export default function Dashboard() {
             <button
               onClick={() => openQr("cobrar")}
               className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
-              style={{ backgroundColor: "#C0392B", minHeight: "110px" }}
+              style={{ background: "var(--y-navy)", minHeight: "110px" }}
             >
               <span className="text-3xl block mb-2">💳</span>
-              <p className="font-bold text-white text-[15px]">Cobrar</p>
-              <p className="text-[11px] text-white/70 mt-0.5">
+              <p className="font-bold text-[15px]" style={{ color: "white" }}>Cobrar</p>
+              <p className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.7)" }}>
                 Muestra tu QR y recibe pagos
               </p>
             </button>
@@ -290,11 +340,11 @@ export default function Dashboard() {
             <button
               onClick={() => openQr("pagar_qr")}
               className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
-              style={{ backgroundColor: "#2D2D4E", minHeight: "110px" }}
+              style={{ background: "var(--y-navy-light)", minHeight: "110px" }}
             >
               <span className="text-3xl block mb-2">📤</span>
-              <p className="font-bold text-white text-[15px]">Pagar QR</p>
-              <p className="text-[11px] text-white/70 mt-0.5">
+              <p className="font-bold text-[15px]" style={{ color: "var(--y-text-on-dark)" }}>Pagar QR</p>
+              <p className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.7)" }}>
                 Escanea o paga cuotas
               </p>
             </button>
@@ -303,13 +353,13 @@ export default function Dashboard() {
             <Link
               href="/prestamos/calculadora"
               className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
-              style={{ backgroundColor: "#F39C12", minHeight: "110px" }}
+              style={{ background: "var(--y-navy-light)", minHeight: "110px", border: "1px solid var(--y-border)" }}
             >
               <span className="text-3xl block mb-2">💰</span>
-              <p className="font-bold text-[#1A1A2E] text-[15px]">
+              <p className="font-bold text-[15px]" style={{ color: "var(--y-text-on-dark)" }}>
                 Pedir préstamo
               </p>
-              <p className="text-[11px] text-[#1A1A2E]/60 mt-0.5">
+              <p className="text-[11px] mt-0.5" style={{ color: "var(--y-text-on-dark-muted)" }}>
                 Hasta Bs {creditLimitBs.toLocaleString()}
               </p>
             </Link>
@@ -319,11 +369,11 @@ export default function Dashboard() {
               <button
                 onClick={() => openQr("pagar_cuota")}
                 className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
-                style={{ backgroundColor: "#27AE60", minHeight: "110px" }}
+                style={{ background: "var(--y-green)", minHeight: "110px" }}
               >
                 <span className="text-3xl block mb-2">✅</span>
-                <p className="font-bold text-white text-[15px]">Pagar deuda</p>
-                <p className="text-[11px] text-white/70 mt-0.5">
+                <p className="font-bold text-[15px]" style={{ color: "var(--y-text-on-dark)" }}>Pagar deuda</p>
+                <p className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.7)" }}>
                   Cuota: Bs {activeLoan!.monthlyPaymentBs.toLocaleString()}
                 </p>
               </button>
@@ -331,11 +381,11 @@ export default function Dashboard() {
               <Link
                 href="/historial"
                 className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
-                style={{ backgroundColor: "#2D2D4E", minHeight: "110px" }}
+                style={{ background: "var(--y-navy-light)", minHeight: "110px" }}
               >
                 <span className="text-3xl block mb-2">📊</span>
-                <p className="font-bold text-white text-[15px]">Mi historial</p>
-                <p className="text-[11px] text-white/70 mt-0.5">
+                <p className="font-bold text-[15px]" style={{ color: "var(--y-text-on-dark)" }}>Mi historial</p>
+                <p className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.7)" }}>
                   Ver tus movimientos
                 </p>
               </Link>
@@ -343,14 +393,20 @@ export default function Dashboard() {
           </div>
         </section>
 
-
         {/* ─── ÚLTIMOS MOVIMIENTOS ─── */}
         {recentTx.length > 0 && (
           <section>
-            <h2 className="text-lg font-bold text-quipu-dark mb-3">
+            <h2 className="text-lg font-bold mb-3" style={{ color: "var(--y-text-primary)" }}>
               Últimos movimientos
             </h2>
-            <div className="bg-white rounded-2xl border border-quipu-text/5 shadow-sm divide-y divide-quipu-text/5">
+            <div
+              className="rounded-2xl shadow-sm divide-y"
+              style={{
+                background: "var(--y-surface)",
+                border: "1px solid var(--y-border)",
+                divideColor: "var(--y-border)",
+              }}
+            >
               {recentTx.map((tx) => {
                 const isIncome =
                   tx.type === "loan_received" || tx.type === "qr_received";
@@ -360,17 +416,16 @@ export default function Dashboard() {
                       {TX_ICONS[tx.type] || "📋"}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-quipu-dark truncate">
+                      <p className="text-sm font-bold truncate" style={{ color: "var(--y-text-primary)" }}>
                         {tx.description}
                       </p>
-                      <p className="text-[10px] text-quipu-text/40">
+                      <p className="text-[10px]" style={{ color: "var(--y-text-tertiary)" }}>
                         {timeAgo(tx.timestamp)}
                       </p>
                     </div>
                     <span
-                      className={`text-sm font-bold shrink-0 ${
-                        isIncome ? "text-quipu-accent" : "text-quipu-primary"
-                      }`}
+                      className="text-sm font-bold shrink-0"
+                      style={{ color: isIncome ? "var(--y-green)" : "var(--y-text-primary)" }}
                     >
                       {isIncome ? "+" : "-"}Bs{" "}
                       {tx.amountBs.toLocaleString()}
@@ -381,7 +436,8 @@ export default function Dashboard() {
             </div>
             <Link
               href="/historial"
-              className="block text-center text-xs font-bold text-quipu-primary mt-3"
+              className="block text-center text-xs font-bold mt-3"
+              style={{ color: "var(--y-primary)" }}
             >
               Ver todos los movimientos →
             </Link>
@@ -390,7 +446,10 @@ export default function Dashboard() {
 
         {/* ─── ROTATING BANNERS ─── */}
         <section>
-          <div className="relative overflow-hidden rounded-2xl border border-[#E8E0D0] bg-white shadow-sm">
+          <div
+            className="relative overflow-hidden rounded-2xl shadow-sm"
+            style={{ background: "var(--y-surface)", border: "1px solid var(--y-border)" }}
+          >
             {BANNERS.map((banner, i) => (
               <div
                 key={i}
@@ -401,29 +460,29 @@ export default function Dashboard() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div
-                    className={`w-11 h-11 rounded-full ${banner.accent} flex items-center justify-center text-xl shrink-0`}
-                  >
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl shrink-0" style={{ background: "var(--y-surface-alt)" }}>
                     {banner.emoji}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-sm text-[#2C2C2C] mb-1">
+                    <h4 className="font-bold text-sm mb-1" style={{ color: "var(--y-text-primary)" }}>
                       {banner.title}
                     </h4>
-                    <p className="text-[12px] text-[#2C2C2C]/70 leading-relaxed mb-3">
+                    <p className="text-[12px] leading-relaxed mb-3" style={{ color: "var(--y-text-secondary)" }}>
                       {banner.text}
                     </p>
                     {banner.href === "__qr__" ? (
                       <button
                         onClick={() => handleBannerCta(banner.href)}
-                        className="text-xs font-bold text-quipu-primary"
+                        className="text-xs font-bold"
+                        style={{ color: "var(--y-primary)" }}
                       >
                         {banner.cta}
                       </button>
                     ) : (
                       <Link
                         href={banner.href}
-                        className="text-xs font-bold text-quipu-primary"
+                        className="text-xs font-bold"
+                        style={{ color: "var(--y-primary)" }}
                       >
                         {banner.cta}
                       </Link>
@@ -437,11 +496,10 @@ export default function Dashboard() {
                 <button
                   key={i}
                   onClick={() => setBannerIndex(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${
-                    i === bannerIndex
-                      ? "bg-quipu-primary w-4"
-                      : "bg-quipu-text/20"
-                  }`}
+                  className={`h-1.5 rounded-full transition-all ${i === bannerIndex ? "w-4" : "w-1.5"}`}
+                  style={{
+                    background: i === bannerIndex ? "var(--y-primary)" : "var(--y-border)",
+                  }}
                 />
               ))}
             </div>

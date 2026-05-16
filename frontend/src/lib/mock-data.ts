@@ -38,5 +38,4 @@ export const mockProviders = [
   { id: "tigo", name: "Tigo Money", status: "connected" as const, type: "wallet" },
   { id: "sms", name: "SMS de Pagos (Bancos)", status: "connected" as const, type: "sms" },
   { id: "email", name: "Gmail (Recibos/Facturas)", status: "pending" as const, type: "email" },
-  { id: "simple", name: "Pago SIMPLE (QR)", status: "disconnected" as const, type: "qr" },
 ];

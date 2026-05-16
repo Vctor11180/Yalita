@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, Search, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 import { getMockTransactions } from "@/lib/mock-data";
 import { useQuipuStore } from "@/stores/quipu.store";
 
@@ -10,20 +10,17 @@ export default function Historial() {
   const [filter, setFilter] = useState("Todos");
   
   const storeTransactions = useQuipuStore((state) => state.transactions);
-  const isScoreLoaded = useQuipuStore((state) => state.isScoreLoaded);
   
-  // Use store txs if any exist, else use fallback mock txs
   const [transactions, setTransactions] = useState<any[]>([]);
 
   useEffect(() => {
     if (storeTransactions.length > 0) {
-      // Map WalletTransaction to display format
       setTransactions(storeTransactions.map(tx => ({
         id: tx.id,
         type: tx.description,
         amount: tx.amountBs,
         date: new Date(tx.timestamp).toLocaleDateString("es-BO", { day: "2-digit", month: "2-digit" }),
-        source: tx.merchant || "Quipu",
+        source: tx.merchant || "Yalita",
         isIncome: tx.type === "loan_received" || tx.type === "qr_received",
       })));
     } else {
@@ -31,24 +28,40 @@ export default function Historial() {
     }
   }, [storeTransactions]);
 
-  const filters = ["Todos", "Quipu", "Tigo Money", "SIMPLE", "Banco Unión"];
+  const filters = ["Todos", "Yalita", "Tigo Money", "SIMPLE"];
 
   const filteredTransactions = transactions.filter(t => 
     filter === "Todos" ? true : t.source === filter
   );
 
   return (
-    <main className="bg-quipu-light min-h-screen pb-6">
-      <header className="p-6 bg-white/50 backdrop-blur-md sticky top-0 z-10 border-b border-quipu-text/5">
+    <main style={{ background: "var(--y-bg)" }} className="min-h-screen pb-6">
+      <header
+        className="p-6 backdrop-blur-md sticky top-0 z-10"
+        style={{
+          background: "color-mix(in srgb, var(--y-surface) 80%, transparent)",
+          borderBottom: "1px solid var(--y-border)",
+        }}
+      >
         <div className="flex items-center mb-4">
-          <Link href="/dashboard" className="mr-4 text-quipu-text hover:text-quipu-primary transition-colors">
+          <Link href="/dashboard" className="mr-4 transition-colors" style={{ color: "var(--y-text-primary)" }}>
             <ArrowLeft size={24} />
           </Link>
           <div className="flex-1">
-            <h1 className="font-serif text-2xl text-quipu-dark">Tu historial verificado</h1>
-            <div className="flex items-center space-x-1 text-quipu-accent mt-1">
-              <ShieldCheck size={14} />
-              <span className="text-xs font-bold">Protegido por zkTLS</span>
+            <h1 className="font-serif text-2xl" style={{ color: "var(--y-text-primary)" }}>Tu historial verificado</h1>
+            {/* Badge zkTLS */}
+            <div
+              className="inline-flex items-center space-x-1.5 mt-1.5 px-3 py-1 rounded-full"
+              style={{
+                background: "var(--y-badge-zk-bg)",
+                border: "1px solid var(--y-badge-zk-border)",
+              }}
+            >
+              <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 0L12 3V7C12 10.5 9.5 13.4 6 14C2.5 13.4 0 10.5 0 7V3L6 0Z" fill="var(--y-green)"/>
+                <path d="M5 7.5L4 6.5L3.3 7.2L5 8.9L8.7 5.2L8 4.5L5 7.5Z" fill="white"/>
+              </svg>
+              <span className="text-[11px] font-bold" style={{ color: "var(--y-badge-zk-text)" }}>Protegido por zkTLS</span>
             </div>
           </div>
         </div>
@@ -59,11 +72,12 @@ export default function Historial() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold transition-all ${
-                filter === f 
-                  ? "bg-quipu-dark text-white shadow-md" 
-                  : "bg-white border border-quipu-text/10 text-quipu-text hover:bg-quipu-text/5"
-              }`}
+              className="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold transition-all"
+              style={{
+                background: filter === f ? "var(--y-navy)" : "var(--y-surface)",
+                color: filter === f ? "var(--y-text-on-dark)" : "var(--y-text-primary)",
+                border: filter === f ? "none" : "1px solid var(--y-border)",
+              }}
             >
               {f}
             </button>
@@ -73,19 +87,22 @@ export default function Historial() {
 
       <div className="p-6 space-y-6">
         {/* Resumen */}
-        <section className="bg-white rounded-2xl p-5 border border-quipu-text/10 shadow-sm animate-fadeInUp">
+        <section
+          className="rounded-2xl p-5 shadow-sm animate-fadeInUp"
+          style={{ background: "var(--y-surface)", border: "1px solid var(--y-border)" }}
+        >
           <ul className="space-y-3">
             <li className="flex justify-between items-center text-sm">
-              <span className="text-quipu-text/60 font-medium">Promedio mensual:</span>
-              <span className="font-bold text-quipu-dark">Bs 7.240</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Promedio mensual:</span>
+              <span className="font-bold" style={{ color: "var(--y-text-primary)" }}>Bs 7.240</span>
             </li>
             <li className="flex justify-between items-center text-sm">
-              <span className="text-quipu-text/60 font-medium">Transacciones este mes:</span>
-              <span className="font-bold text-quipu-dark">34</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Transacciones este mes:</span>
+              <span className="font-bold" style={{ color: "var(--y-text-primary)" }}>34</span>
             </li>
             <li className="flex justify-between items-center text-sm">
-              <span className="text-quipu-text/60 font-medium">Racha activa:</span>
-              <span className="font-bold text-quipu-secondary">6 meses consecutivos 🔥</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Racha activa:</span>
+              <span className="font-bold" style={{ color: "var(--y-amber)" }}>6 meses consecutivos 🔥</span>
             </li>
           </ul>
         </section>
@@ -94,37 +111,41 @@ export default function Historial() {
         <section>
           {filteredTransactions.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 opacity-50">
-              <Search size={48} className="mb-4 text-quipu-text/30" />
-              <p className="text-center font-medium">No hay transacciones<br/>para este filtro</p>
+              <Search size={48} className="mb-4" style={{ color: "var(--y-text-tertiary)" }} />
+              <p className="text-center font-medium" style={{ color: "var(--y-text-secondary)" }}>No hay transacciones<br/>para este filtro</p>
             </div>
           ) : (
             <div className="space-y-3">
               {filteredTransactions.map((tx, index) => (
                 <div 
                   key={tx.id} 
-                  className="bg-white rounded-2xl p-4 border border-quipu-text/10 shadow-sm flex items-center justify-between animate-fadeInUp"
-                  style={{ animationDelay: `${index * 0.05}s` }}
+                  className="rounded-2xl p-4 shadow-sm flex items-center justify-between animate-fadeInUp"
+                  style={{
+                    background: "var(--y-surface)",
+                    border: "1px solid var(--y-border)",
+                    animationDelay: `${index * 0.05}s`,
+                  }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-quipu-light rounded-full flex items-center justify-center text-lg font-serif text-quipu-primary">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-serif"
+                      style={{ background: "var(--y-surface-alt)", color: "var(--y-primary)" }}
+                    >
                       {tx.source.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-bold text-quipu-dark text-sm">{tx.type}</p>
+                      <p className="font-bold text-sm" style={{ color: "var(--y-text-primary)" }}>{tx.type}</p>
                       <div className="flex items-center space-x-2 text-xs">
-                        <span className="text-quipu-text/50">{tx.date}</span>
-                        <span className="text-quipu-text/20">•</span>
-                        <span className="text-quipu-text/70 font-medium">{tx.source}</span>
+                        <span style={{ color: "var(--y-text-tertiary)" }}>{tx.date}</span>
+                        <span style={{ color: "var(--y-text-tertiary)" }}>•</span>
+                        <span className="font-medium" style={{ color: "var(--y-text-secondary)" }}>{tx.source}</span>
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className={`font-bold ${tx.isIncome ? 'text-quipu-accent' : 'text-quipu-primary'}`}>
-                      {tx.isIncome ? '+' : '-'} Bs {tx.amount}
+                    <p className="font-bold" style={{ color: tx.isIncome ? "var(--y-green)" : "var(--y-text-primary)" }}>
+                      {tx.isIncome ? '+' : '-'} Bs {tx.amount} <span style={{ color: "var(--y-green)" }}>✓</span>
                     </p>
-                    <div className="inline-flex items-center space-x-1 bg-quipu-accent/10 px-2 py-0.5 rounded-full mt-1 animate-pulse-slow">
-                      <span className="text-[10px] font-bold text-quipu-accent">Verificado ✓</span>
-                    </div>
                   </div>
                 </div>
               ))}

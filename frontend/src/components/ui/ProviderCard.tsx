@@ -12,30 +12,43 @@ export function ProviderCard({ name, icon, status, onClick }: ProviderCardProps)
     <button
       onClick={onClick}
       disabled={status === "connected"}
-      className="w-full flex items-center justify-between p-4 bg-white border border-quipu-text/10 rounded-2xl shadow-sm hover:shadow-md transition-shadow disabled:opacity-80 disabled:cursor-not-allowed"
+      className="w-full flex items-center justify-between p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow disabled:cursor-not-allowed"
+      style={{
+        background: "var(--y-surface)",
+        border: "1px solid var(--y-border)",
+      }}
     >
       <div className="flex items-center space-x-4">
-        <div className="w-10 h-10 flex items-center justify-center bg-quipu-light rounded-full text-quipu-primary">
+        <div
+          className="w-10 h-10 flex items-center justify-center rounded-full"
+          style={{ background: "var(--y-surface-alt)" }}
+        >
           {icon}
         </div>
-        <span className="font-semibold text-quipu-text">{name}</span>
+        <span className="font-semibold" style={{ color: "var(--y-text-primary)" }}>{name}</span>
       </div>
       
       <div>
         {status === "connected" && (
-          <div className="flex items-center text-quipu-accent space-x-1 bg-quipu-accent/10 px-3 py-1 rounded-full">
-            <CheckCircle2 size={16} />
-            <span className="text-xs font-bold">Conectado</span>
+          <div
+            className="flex items-center space-x-1 px-3 py-1 rounded-full"
+            style={{ background: "var(--y-green-light)", border: "1px solid var(--y-green)" }}
+          >
+            <CheckCircle2 size={14} style={{ color: "var(--y-green)" }} />
+            <span className="text-xs font-bold" style={{ color: "var(--y-green)" }}>Conectado</span>
           </div>
         )}
         {status === "pending" && (
-          <div className="flex items-center text-quipu-secondary space-x-1 bg-quipu-secondary/10 px-3 py-1 rounded-full">
-            <Clock size={16} />
-            <span className="text-xs font-bold">Pendiente</span>
+          <div
+            className="flex items-center space-x-1 px-3 py-1 rounded-full"
+            style={{ background: "rgba(245,158,11,0.12)", border: "1px solid var(--y-amber)" }}
+          >
+            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--y-amber)" }} />
+            <span className="text-xs font-bold" style={{ color: "var(--y-amber)" }}>Pendiente</span>
           </div>
         )}
         {status === "disconnected" && (
-          <div className="flex items-center text-quipu-primary space-x-1">
+          <div className="flex items-center space-x-1" style={{ color: "var(--y-primary)" }}>
             <span className="text-sm font-medium">Conectar</span>
             <ChevronRight size={16} />
           </div>

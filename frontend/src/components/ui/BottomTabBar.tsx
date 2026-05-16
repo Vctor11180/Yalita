@@ -16,7 +16,6 @@ export function BottomTabBar() {
 
   const hasActiveLoan = activeLoan && activeLoan.status === "active";
 
-  // If there's an active loan, the Préstamos tab goes to /prestamos/activo
   const prestamosHref = hasActiveLoan
     ? "/prestamos/activo"
     : "/prestamos/calculadora";
@@ -29,7 +28,13 @@ export function BottomTabBar() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-quipu-light border-t border-gray-200 safe-area-pb z-50">
+    <div
+      className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto safe-area-pb z-50"
+      style={{
+        background: "var(--y-surface)",
+        borderTop: "1px solid var(--y-border)",
+      }}
+    >
       <nav className="flex justify-around items-center h-16 px-2">
         {tabs.map((tab) => {
           const isActive =
@@ -40,11 +45,10 @@ export function BottomTabBar() {
             <Link
               key={tab.name}
               href={tab.href}
-              className={`relative flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${
-                isActive
-                  ? "text-quipu-primary"
-                  : "text-quipu-text/60 hover:text-quipu-primary/80"
-              }`}
+              className="relative flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors"
+              style={{
+                color: isActive ? "var(--y-primary)" : "var(--y-text-tertiary)",
+              }}
             >
               <div className="relative">
                 <Icon
@@ -53,12 +57,25 @@ export function BottomTabBar() {
                 />
                 {/* Badge for active loan */}
                 {tab.name === "Préstamos" && hasActiveLoan && (
-                  <span className="absolute -top-1.5 -right-2.5 w-4 h-4 bg-quipu-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  <span
+                    className="absolute -top-1.5 -right-2.5 w-4 h-4 text-[9px] font-bold rounded-full flex items-center justify-center"
+                    style={{
+                      background: "var(--y-primary)",
+                      color: "#FFFFFF",
+                    }}
+                  >
                     1
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-medium">{tab.name}</span>
+              <span
+                className="text-[10px] font-medium"
+                style={{
+                  color: isActive ? "var(--y-primary)" : "var(--y-text-tertiary)",
+                }}
+              >
+                {tab.name}
+              </span>
             </Link>
           );
         })}

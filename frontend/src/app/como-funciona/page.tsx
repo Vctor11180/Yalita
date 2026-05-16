@@ -7,29 +7,29 @@ import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 const STEPS = [
   {
     emoji: "📱",
-    color: "bg-quipu-primary/10",
-    border: "border-quipu-primary/20",
+    color: "rgba(var(--y-primary-rgb), 0.1)",
+    border: "rgba(var(--y-primary-rgb), 0.2)",
     title: "Conectas tu historial de pagos",
-    text: "Autorizas a Quipu a ver cuánto cobras por QR cada mes. Nada más. No vemos tus contactos, fotos ni contraseñas.",
+    text: "Autorizas a Yalita a ver cuánto cobras por QR cada mes. Nada más. No vemos tus contactos, fotos ni contraseñas.",
   },
   {
     emoji: "⭐",
-    color: "bg-quipu-secondary/10",
-    border: "border-quipu-secondary/20",
+    color: "rgba(var(--y-aqua-rgb), 0.1)",
+    border: "rgba(var(--y-aqua-rgb), 0.2)",
     title: "Calculamos tu puntaje",
-    text: "Miramos cuánto cobras, con qué frecuencia y hace cuánto tiempo. Eso se convierte en tu Puntaje Quipu: un número entre 300 y 850.",
+    text: "Miramos cuánto cobras, con qué frecuencia y hace cuánto tiempo. Eso se convierte en tu Poder Yalita: un número entre 300 y 850.",
   },
   {
     emoji: "💰",
-    color: "bg-quipu-accent/10",
-    border: "border-quipu-accent/20",
+    color: "rgba(44, 180, 98, 0.1)",
+    border: "rgba(44, 180, 98, 0.2)",
     title: "Accedes a crédito justo",
     text: "Con tu puntaje, puedes pedir desde Bs 500 hasta Bs 8.000 a tasas mucho más bajas que cualquier prestamista del mercado.",
   },
   {
     emoji: "🔄",
-    color: "bg-blue-50",
-    border: "border-blue-200",
+    color: "rgba(var(--y-navy-rgb), 0.1)",
+    border: "rgba(var(--y-navy-rgb), 0.2)",
     title: "Pagas mientras cobras",
     text: "Cada vez que recibes un pago QR, una parte pequeña va a tu cuota automáticamente. Tu deuda se paga sola mientras trabajas.",
   },
@@ -41,7 +41,7 @@ const FAQS = [
     a: "Nos avisas y buscamos una solución juntos. No hay cobros ocultos ni penalizaciones abusivas.",
   },
   {
-    q: "¿Quipu es un banco?",
+    q: "¿Yalita es un banco?",
     a: "No. Somos un protocolo de crédito descentralizado. Eso significa que el dinero viene de otras personas que prestan sus ahorros, no de un banco. Por eso podemos ofrecer mejores tasas.",
   },
   {
@@ -54,22 +54,29 @@ export default function ComoFunciona() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <main className="min-h-screen bg-quipu-light flex flex-col">
+    <main style={{ background: "var(--y-bg)" }} className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="flex items-center p-6 bg-white/50 backdrop-blur-md sticky top-0 z-10 border-b border-quipu-text/5">
+      <header 
+        className="flex items-center p-6 backdrop-blur-md sticky top-0 z-10"
+        style={{ background: "var(--y-surface)", borderBottom: "1px solid var(--y-border)" }}
+      >
         <Link
           href="/dashboard"
-          className="mr-4 text-quipu-text hover:text-quipu-primary transition-colors"
+          className="mr-4 transition-colors"
+          style={{ color: "var(--y-text-primary)" }}
         >
           <ArrowLeft size={24} />
         </Link>
-        <h1 className="font-serif text-2xl text-quipu-dark">
-          Cómo funciona Quipu
+        <h1 className="font-serif text-2xl" style={{ color: "var(--y-text-primary)" }}>
+          Cómo funciona Yalita
         </h1>
       </header>
 
       <div className="flex-1 p-6 space-y-6 pb-24">
-        <p className="text-center text-sm font-bold text-quipu-text/50 uppercase tracking-wider">
+        <p 
+          className="text-center text-[10px] font-bold uppercase tracking-[0.2em]" 
+          style={{ color: "var(--y-text-tertiary)" }}
+        >
           En 4 pasos simples
         </p>
 
@@ -78,25 +85,30 @@ export default function ComoFunciona() {
           {STEPS.map((step, i) => (
             <div
               key={i}
-              className={`bg-white rounded-2xl p-5 border ${step.border} shadow-sm animate-fadeInUp`}
-              style={{ animationDelay: `${i * 0.1}s` }}
+              className="rounded-2xl p-5 shadow-sm animate-fadeInUp"
+              style={{ 
+                background: "var(--y-surface)", 
+                border: `1px solid ${step.border}`,
+                animationDelay: `${i * 0.1}s` 
+              }}
             >
               <div className="flex items-start space-x-4">
                 <div
-                  className={`w-12 h-12 rounded-full ${step.color} flex items-center justify-center text-2xl shrink-0`}
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-2xl shrink-0"
+                  style={{ background: step.color }}
                 >
                   {step.emoji}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-1">
-                    <span className="text-[10px] font-bold text-quipu-text/30 uppercase">
+                    <span className="text-[10px] font-bold uppercase" style={{ color: "var(--y-text-tertiary)" }}>
                       Paso {i + 1}
                     </span>
                   </div>
-                  <h3 className="font-bold text-quipu-dark mb-1">
+                  <h3 className="font-bold mb-1" style={{ color: "var(--y-text-primary)" }}>
                     {step.title}
                   </h3>
-                  <p className="text-sm text-quipu-text/70 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--y-text-secondary)" }}>
                     {step.text}
                   </p>
                 </div>
@@ -106,45 +118,51 @@ export default function ComoFunciona() {
         </div>
 
         {/* ─── SEPARATOR ─── */}
-        <div className="flex items-center space-x-3">
-          <div className="flex-1 h-px bg-quipu-text/10" />
-          <span className="text-xs font-bold text-quipu-text/30 uppercase tracking-wider">
+        <div className="flex items-center space-x-3 py-4">
+          <div className="flex-1 h-px" style={{ background: "var(--y-border)" }} />
+          <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "var(--y-text-tertiary)" }}>
             ¿Más dudas?
           </span>
-          <div className="flex-1 h-px bg-quipu-text/10" />
+          <div className="flex-1 h-px" style={{ background: "var(--y-border)" }} />
         </div>
 
         {/* ─── FAQS ─── */}
         <div className="space-y-2">
-          <h3 className="font-bold text-quipu-dark text-lg mb-3">
+          <h3 className="font-bold text-lg mb-3" style={{ color: "var(--y-text-primary)" }}>
             Preguntas frecuentes
           </h3>
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl border border-quipu-text/10 shadow-sm overflow-hidden"
+              className="rounded-2xl shadow-sm overflow-hidden"
+              style={{ background: "var(--y-surface)", border: "1px solid var(--y-border)" }}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="w-full flex items-center justify-between p-4 text-left"
               >
-                <span className="font-bold text-sm text-quipu-dark pr-4">
+                <span className="font-bold text-sm pr-4" style={{ color: "var(--y-text-primary)" }}>
                   {faq.q}
                 </span>
                 {openFaq === i ? (
                   <ChevronUp
                     size={20}
-                    className="text-quipu-text/40 shrink-0"
+                    style={{ color: "var(--y-text-tertiary)" }}
+                    className="shrink-0"
                   />
                 ) : (
                   <ChevronDown
                     size={20}
-                    className="text-quipu-text/40 shrink-0"
+                    style={{ color: "var(--y-text-tertiary)" }}
+                    className="shrink-0"
                   />
                 )}
               </button>
               {openFaq === i && (
-                <div className="px-4 pb-4 text-sm text-quipu-text/70 leading-relaxed animate-fadeInUp">
+                <div 
+                  className="px-4 pb-4 text-sm leading-relaxed animate-fadeInUp"
+                  style={{ color: "var(--y-text-secondary)" }}
+                >
                   {faq.a}
                 </div>
               )}
@@ -156,7 +174,8 @@ export default function ComoFunciona() {
         <div className="pt-4">
           <Link
             href="/prestamos/calculadora"
-            className="w-full bg-quipu-primary hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-xl text-center transition-all flex justify-center items-center space-x-2 shadow-lg shadow-quipu-primary/20 animate-shimmer-btn"
+            className="w-full font-semibold py-4 px-6 rounded-xl text-center transition-all flex justify-center items-center space-x-2 shadow-lg animate-shimmer-btn"
+            style={{ background: "var(--y-primary)", color: "var(--y-text-on-primary)" }}
           >
             <span>Empezar ahora</span>
             <span className="text-xl">→</span>

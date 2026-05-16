@@ -7,10 +7,10 @@ export const COPY = {
     contract: "Acuerdo automático",
     usdc: "dólares digitales",
     blockchain: "sistema verificado",
-    nft: "Tu certificado de buen pagador",
+    nft: "Tu reputación es tu mayor activo",
     signTx: "Confirmar con tu PIN",
     gasFee: "", // oculto en simple
-    score: "Tu puntaje Quipu",
+    score: "Tu puntaje Yalita",
     attestation: "Verificación de pagos",
   },
   advanced: {
