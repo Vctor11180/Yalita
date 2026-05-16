@@ -42,27 +42,21 @@ team1/
 └── scripts/          → Generador de datos sintéticos, helpers
 ```
 
-## 🚀 Quick start
+## 🎬 Demo en vivo
+
+- Frontend: [https://yalita.vercel.app](https://yalita.vercel.app)
+- Video: [pendiente - grabar antes del demo day]
+- Contratos en Fuji: [pendiente deploy] (pendiente deploy)
+
+## 🚀 Setup local
 
 ```bash
-# 1. Instalar dependencias
+git clone <repo> && cd team1
 pnpm install
-
-# 2. Copiar y configurar .env
-cp .env.example .env
-cp frontend/.env.example frontend/.env.local
-cp backend/.env.example backend/.env
-cp contracts/.env.example contracts/.env
-
-# 3. Levantar todo en paralelo (frontend en :3000, backend en :3001)
+cp .env.example .env.local && cp backend/.env.example backend/.env
+pnpm --filter @yalita/backend db:push
+pnpm --filter @yalita/backend db:seed
 pnpm dev
-
-# 4. Compilar y testear contratos
-pnpm contracts:build
-pnpm contracts:test
-
-# 5. Desplegar contratos a Fuji testnet
-pnpm contracts:deploy:fuji
 ```
 
 ## 🎯 Diferenciadores técnicos
@@ -96,3 +90,9 @@ Ver [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) para instrucciones completas.
 ## 📄 Licencia
 
 MIT
+
+## 🧑‍⚖️ Para el jurado
+
+- Cómo ver el frontend: `pnpm dev` → `http://localhost:3000`
+- Cómo simular un pago QR: `npx tsx scripts/simulate-qr-payment.ts 0xDEMO000000000000000000000000000000000001 500`
+- Usuario demo pre-cargado: María, score 720, préstamo activo Bs 1,043

@@ -61,4 +61,37 @@ contract ScoringEngineTest is Test {
         vm.expectRevert(ScoringEngine.NoAttestation.selector);
         engine.computeAndIssueScore(alice);
     }
+
+    function test_Score_BolivianUser_TigoMoney() public view {
+        uint16 score = engine.previewScore(45, 28_000_00, 6);
+        assertGe(score, 550);
+        assertLe(score, 750);
+    }
+
+    function test_Score_Updates_Improve() public {
+        vm.prank(oracle);
+        attReg.submitAttestation(
+            bytes32("proof-low"),
+            IAttestationRegistry.DataSource.TIGO_MONEY,
+            alice,
+            8,
+            2_000_00,
+            2
+        );
+
+        uint16 firstScore = engine.computeAndIssueScore(alice);
+
+        vm.prank(oracle);
+        attReg.submitAttestation(
+            bytes32("proof-high"),
+            IAttestationRegistry.DataSource.TIGO_MONEY,
+            alice,
+            55,
+            32_000_00 * 6,
+            6
+        );
+
+        uint16 secondScore = engine.computeAndIssueScore(alice);
+        assertGt(secondScore, firstScore);
+    }
 }

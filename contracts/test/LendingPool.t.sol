@@ -70,6 +70,37 @@ contract LendingPoolTest is Test {
         pool.requestLoan(500e6, 90);
     }
 
+    function test_Repay_Partial() public {
+        vm.prank(scorer);
+        scoreReg.mintScore(alice, 700, 150, 8_000_00);
+
+        vm.prank(alice);
+        pool.requestLoan(100e6, 90);
+
+        LendingPool.Loan memory beforeRepay = pool.loans(alice);
+        assertTrue(beforeRepay.active);
+
+        usdc.mint(alice, 50e6);
+        vm.startPrank(alice);
+        usdc.approve(address(pool), 50e6);
+        pool.repayLoan(50e6);
+        vm.stopPrank();
+
+        LendingPool.Loan memory afterRepay = pool.loans(alice);
+        assertTrue(afterRepay.active);
+        assertEq(afterRepay.totalDue, beforeRepay.totalDue - 50e6);
+        assertEq(afterRepay.principal, beforeRepay.principal);
+    }
+
+    function test_RequestLoan_InsufficientScore() public {
+        vm.prank(scorer);
+        scoreReg.mintScore(alice, 400, 30, 1_000_00);
+
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(LendingPool.ScoreTooLow.selector, 400, 450));
+        pool.requestLoan(100e6, 90);
+    }
+
     function test_RepayLoan() public {
         vm.prank(scorer);
         scoreReg.mintScore(alice, 700, 150, 8_000_00);
