@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Lock } from "lucide-react";
+import { useQuipuStore } from "@/stores/quipu.store";
 
 export default function OnboardingProfile() {
   const router = useRouter();
+  const setUserName = useQuipuStore((s) => s.setUserName);
+
   const [name, setName] = useState("");
   const [ci, setCi] = useState("");
 
@@ -20,55 +23,92 @@ export default function OnboardingProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isValid) router.push("/onboarding/connect");
+    if (isValid) {
+      // Persist name to store before navigating
+      setUserName(name.trim());
+      router.push("/onboarding/connect");
+    }
   };
 
   return (
-    <main className="min-h-screen bg-quipu-light flex flex-col p-6">
+    <main style={{ background: "var(--y-bg)" }} className="min-h-screen flex flex-col p-6">
       <header className="mb-8 pt-4">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-sm font-bold text-quipu-text/50 uppercase tracking-wider">Paso 3 de 4</span>
-          <Link href="/onboarding/otp" className="text-quipu-text/50 hover:text-quipu-text text-sm">Atrás</Link>
+          <span
+            className="text-sm font-bold uppercase tracking-wider"
+            style={{ color: "var(--y-text-tertiary)" }}
+          >
+            Paso 3 de 4
+          </span>
+          <Link href="/onboarding/otp" className="text-sm" style={{ color: "var(--y-text-tertiary)" }}>
+            Atrás
+          </Link>
         </div>
         <ProgressBar progress={75} />
       </header>
 
       <div className="flex-1 animate-fade-in">
-        <h1 className="font-serif text-3xl text-quipu-dark mb-2">Cuéntanos un poco de ti</h1>
-        <p className="text-quipu-text/70 mb-8 leading-relaxed">
+        <h1 className="font-serif text-3xl mb-2" style={{ color: "var(--y-text-primary)" }}>
+          Cuéntanos un poco de ti
+        </h1>
+        <p className="mb-8 leading-relaxed" style={{ color: "var(--y-text-secondary)" }}>
           Esto nos ayuda a crear tu identidad financiera única.
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col h-full">
           <div className="space-y-4 mb-6">
             <div>
-              <label className="block text-sm font-bold text-quipu-text mb-2">Nombre completo</label>
+              <label
+                className="block text-sm font-bold mb-2"
+                style={{ color: "var(--y-text-primary)" }}
+              >
+                Nombre completo
+              </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ej. María Choque"
-                className="w-full px-4 py-4 bg-white border-2 border-quipu-text/10 rounded-xl text-lg font-semibold text-quipu-text focus:outline-none focus:border-quipu-primary transition-colors placeholder:text-quipu-text/30 shadow-sm"
+                className="w-full px-4 py-4 rounded-xl text-lg font-semibold focus:outline-none transition-colors shadow-sm"
+                style={{
+                  background: "var(--y-surface)",
+                  border: `2px solid ${name.length > 2 ? "var(--y-green)" : "var(--y-border)"}`,
+                  color: "var(--y-text-primary)",
+                }}
+                autoFocus
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-bold text-quipu-text mb-2">Últimos 4 dígitos de tu CI</label>
+              <label
+                className="block text-sm font-bold mb-2"
+                style={{ color: "var(--y-text-primary)" }}
+              >
+                Últimos 4 dígitos de tu CI
+              </label>
               <input
                 type="text"
                 inputMode="numeric"
                 value={ci}
                 onChange={handleCiChange}
                 placeholder="Ej. 4567"
-                className="w-full px-4 py-4 bg-white border-2 border-quipu-text/10 rounded-xl text-lg font-semibold text-quipu-text focus:outline-none focus:border-quipu-primary transition-colors placeholder:text-quipu-text/30 shadow-sm"
+                className="w-full px-4 py-4 rounded-xl text-lg font-semibold focus:outline-none transition-colors shadow-sm"
+                style={{
+                  background: "var(--y-surface)",
+                  border: `2px solid ${ci.length === 4 ? "var(--y-green)" : "var(--y-border)"}`,
+                  color: "var(--y-text-primary)",
+                }}
               />
             </div>
           </div>
 
-          <div className="flex items-center space-x-2 bg-quipu-accent/10 p-3 rounded-lg mb-8">
-            <Lock size={16} className="text-quipu-accent" />
-            <p className="text-xs font-medium text-quipu-text/80">
-              Tus datos viajan cifrados y nunca se venden.
+          <div
+            className="flex items-center gap-2 p-3 rounded-xl mb-8"
+            style={{ background: "var(--y-green-light)", border: "1px solid var(--y-green)" }}
+          >
+            <Lock size={14} style={{ color: "var(--y-green)", flexShrink: 0 }} />
+            <p className="text-xs font-medium" style={{ color: "var(--y-green)" }}>
+              Tus datos viajan cifrados y nunca se venden ni comparten.
             </p>
           </div>
 
@@ -76,7 +116,11 @@ export default function OnboardingProfile() {
             <button
               type="submit"
               disabled={!isValid}
-              className="w-full bg-quipu-primary hover:bg-red-700 disabled:bg-quipu-text/10 disabled:text-quipu-text/40 text-white font-semibold py-4 px-6 rounded-xl text-center transition-all"
+              className="w-full font-semibold py-4 px-6 rounded-xl text-center transition-all"
+              style={{
+                background: isValid ? "var(--y-primary)" : "var(--y-surface-alt)",
+                color: isValid ? "var(--y-text-on-dark)" : "var(--y-text-tertiary)",
+              }}
             >
               Continuar
             </button>

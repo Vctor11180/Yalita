@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { QRBottomSheet } from "@/components/ui/QRBottomSheet";
-import { Bell, ArrowRight, CreditCard, ShieldCheck } from "lucide-react";
+import { Bell, CreditCard, ShieldCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import Link from "next/link";
 import { useQuipuStore } from "@/stores/quipu.store";
@@ -63,20 +63,56 @@ export default function Dashboard() {
   const userName = useQuipuStore((s) => s.userName);
   const score = useQuipuStore((s) => s.score);
   const balanceUsdc = useQuipuStore((s) => s.balanceUsdc);
+  const dataSource = useQuipuStore((s) => s.dataSource);
   const getBalanceBs = useQuipuStore((s) => s.getBalanceBs);
   const getCreditLimitBs = useQuipuStore((s) => s.getCreditLimitBs);
   const getAvailableCreditBs = useQuipuStore((s) => s.getAvailableCreditBs);
   const activeLoan = useQuipuStore((s) => s.activeLoan);
   const transactions = useQuipuStore((s) => s.transactions);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
   const [mounted, setMounted] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
-  const [qrMode, setQrMode] = useState<"cobrar" | "pagar" | undefined>();
+  const [qrMode, setQrMode] = useState<"cobrar" | "pagar" | "pagar_qr" | "pagar_cuota" | undefined>();
   const [bannerIndex, setBannerIndex] = useState(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // ── GSAP stagger entrance ─────────────────────────────────────────────────
+  useEffect(() => {
+    if (!mounted) return;
+    let ctx: { revert: () => void } | null = null;
+
+    import("gsap").then(({ gsap }) => {
+      ctx = gsap.context(() => {
+        // Sections stagger in from below
+        gsap.from(contentRef.current?.querySelectorAll("section, header") ?? [], {
+          opacity: 0,
+          y: 18,
+          duration: 0.45,
+          stagger: 0.07,
+          ease: "power2.out",
+          clearProps: "all",
+        });
+
+        // Action grid buttons subtle pop
+        gsap.from(contentRef.current?.querySelectorAll(".action-btn") ?? [], {
+          scale: 0.93,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.06,
+          ease: "back.out(1.5)",
+          delay: 0.35,
+          clearProps: "all",
+        });
+      }, contentRef);
+    });
+
+    return () => { ctx?.revert(); };
+  }, [mounted]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -93,7 +129,7 @@ export default function Dashboard() {
     }
   }, []);
 
-  const openQr = (mode: "cobrar" | "pagar") => {
+  const openQr = (mode: "cobrar" | "pagar" | "pagar_qr" | "pagar_cuota") => {
     setQrMode(mode);
     setQrOpen(true);
   };
@@ -118,7 +154,7 @@ export default function Dashboard() {
     : 0;
 
   return (
-    <main style={{ background: "var(--y-bg)" }} className="min-h-screen pb-24">
+    <main ref={contentRef} style={{ background: "var(--y-bg)" }} className="min-h-screen pb-24">
       {/* ─── HEADER ─── */}
       <header
         className="flex justify-between items-center p-6 backdrop-blur-md sticky top-0 z-10"
@@ -213,8 +249,26 @@ export default function Dashboard() {
             animationDelay: "0.1s",
           }}
         >
-          {/* On-chain badge */}
-          <div className="absolute top-3 right-3 flex items-center space-x-1">
+          {/* On-chain + dataSource badges */}
+          <div className="absolute top-3 right-3 flex items-center gap-2">
+            {/* dataSource flywheel indicator */}
+            <span
+              className="text-[9px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-wider"
+              style={{
+                background: dataSource === "internal"
+                  ? "rgba(44,180,98,0.18)"
+                  : dataSource === "hybrid"
+                  ? "rgba(245,158,11,0.18)"
+                  : "rgba(170,239,223,0.1)",
+                color: dataSource === "internal"
+                  ? "var(--y-green)"
+                  : dataSource === "hybrid"
+                  ? "var(--y-amber)"
+                  : "var(--y-aqua)",
+              }}
+            >
+              {dataSource === "internal" ? "Historial propio" : dataSource === "hybrid" ? "Mixto" : "Externo"}
+            </span>
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--y-green)" }} />
             <span className="text-[10px] font-medium" style={{ color: "var(--y-text-on-dark-muted)" }}>On-chain</span>
           </div>
@@ -326,7 +380,7 @@ export default function Dashboard() {
             {/* COBRAR */}
             <button
               onClick={() => openQr("cobrar")}
-              className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
+              className="action-btn rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
               style={{ background: "var(--y-navy)", minHeight: "110px" }}
             >
               <span className="text-3xl block mb-2">💳</span>
@@ -339,7 +393,7 @@ export default function Dashboard() {
             {/* PAGAR QR */}
             <button
               onClick={() => openQr("pagar_qr")}
-              className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
+              className="action-btn rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
               style={{ background: "var(--y-navy-light)", minHeight: "110px" }}
             >
               <span className="text-3xl block mb-2">📤</span>
@@ -352,7 +406,7 @@ export default function Dashboard() {
             {/* PEDIR PRÉSTAMO */}
             <Link
               href="/prestamos/calculadora"
-              className="rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
+              className="action-btn rounded-2xl p-5 text-left transition-all active:scale-[0.97]"
               style={{ background: "var(--y-navy-light)", minHeight: "110px", border: "1px solid var(--y-border)" }}
             >
               <span className="text-3xl block mb-2">💰</span>
@@ -404,7 +458,6 @@ export default function Dashboard() {
               style={{
                 background: "var(--y-surface)",
                 border: "1px solid var(--y-border)",
-                divideColor: "var(--y-border)",
               }}
             >
               {recentTx.map((tx) => {

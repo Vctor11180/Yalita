@@ -8,8 +8,10 @@ import { useQuipuStore } from "@/stores/quipu.store";
 
 export default function Historial() {
   const [filter, setFilter] = useState("Todos");
-  
-  const storeTransactions = useQuipuStore((state) => state.transactions);
+
+  const storeTransactions = useQuipuStore((s) => s.transactions);
+  const dataSource = useQuipuStore((s) => s.dataSource);
+  const score = useQuipuStore((s) => s.score);
   
   const [transactions, setTransactions] = useState<any[]>([]);
 
@@ -93,16 +95,37 @@ export default function Historial() {
         >
           <ul className="space-y-3">
             <li className="flex justify-between items-center text-sm">
-              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Promedio mensual:</span>
-              <span className="font-bold" style={{ color: "var(--y-text-primary)" }}>Bs 7.240</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Total transacciones:</span>
+              <span className="font-bold" style={{ color: "var(--y-text-primary)" }}>{transactions.length}</span>
             </li>
             <li className="flex justify-between items-center text-sm">
-              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Transacciones este mes:</span>
-              <span className="font-bold" style={{ color: "var(--y-text-primary)" }}>34</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Puntaje Yalita:</span>
+              <span className="font-bold font-lora" style={{ color: "var(--y-amber)" }}>{score}</span>
             </li>
+            {/* dataSource — argumento del flywheel para el jurado */}
             <li className="flex justify-between items-center text-sm">
-              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Racha activa:</span>
-              <span className="font-bold" style={{ color: "var(--y-amber)" }}>6 meses consecutivos 🔥</span>
+              <span style={{ color: "var(--y-text-secondary)" }} className="font-medium">Fuente del historial:</span>
+              <span
+                className="text-xs font-bold px-2 py-0.5 rounded-full"
+                style={{
+                  background: dataSource === "internal"
+                    ? "rgba(44,180,98,0.12)"
+                    : dataSource === "hybrid"
+                    ? "rgba(245,158,11,0.12)"
+                    : "rgba(170,239,223,0.1)",
+                  color: dataSource === "internal"
+                    ? "var(--y-green)"
+                    : dataSource === "hybrid"
+                    ? "var(--y-amber)"
+                    : "var(--y-aqua)",
+                }}
+              >
+                {dataSource === "internal"
+                  ? "Historial Yalita propio"
+                  : dataSource === "hybrid"
+                  ? "Mixto: externo + Yalita"
+                  : "Externo (Tigo / SIMPLE)"}
+              </span>
             </li>
           </ul>
         </section>

@@ -2,13 +2,21 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Lock } from "lucide-react";
 import { ImpactTable } from "@/components/ui/ImpactTable";
+import { useQuipuStore } from "@/stores/quipu.store";
 
 export default function CalculadoraPrestamos() {
   const [mounted, setMounted] = useState(false);
   const [monto, setMonto] = useState(1000);
   const [plazo, setPlazo] = useState(3);
+
+  const activeLoan = useQuipuStore((s) => s.activeLoan);
+
+  // Loan is locked if active and < 50% installments paid
+  const isLoanLocked =
+    activeLoan?.status === "active" &&
+    activeLoan.paidInstallments < Math.ceil(activeLoan.termMonths / 2);
 
   useEffect(() => {
     setMounted(true);
@@ -47,14 +55,15 @@ export default function CalculadoraPrestamos() {
               <div className="font-lora text-4xl mt-1" style={{ color: "var(--y-primary)" }}>Bs {monto.toLocaleString()}</div>
             </div>
             
-            <input 
-              type="range" 
-              min="500" 
-              max="10000" 
+            <input
+              type="range"
+              min="500"
+              max="10000"
               step="500"
               value={monto}
-              onChange={(e) => setMonto(Number(e.target.value))}
-              className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+              onChange={(e) => !isLoanLocked && setMonto(Number(e.target.value))}
+              disabled={isLoanLocked}
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               style={{ background: "var(--y-border)" }}
             />
             <div className="flex justify-between mt-2 text-xs font-bold mb-4" style={{ color: "var(--y-text-tertiary)" }}>
@@ -100,16 +109,28 @@ export default function CalculadoraPrestamos() {
         </div>
 
         <div className="pb-8 pt-4">
-          <Link
-            href={`/prestamos/solicitar?monto=${monto}&plazo=${plazo}`}
-            className="w-full font-semibold py-4 px-6 rounded-xl text-center transition-all flex justify-center items-center space-x-2 shadow-lg animate-shimmer-btn"
-            style={{ background: "var(--y-primary)", color: "var(--y-text-on-primary)" }}
-          >
-            <span>Solicitar este préstamo</span>
-            <span className="text-xl">→</span>
-          </Link>
+          {isLoanLocked ? (
+            <div
+              className="w-full font-semibold py-4 px-6 rounded-xl text-center flex justify-center items-center gap-2"
+              style={{ background: "var(--y-surface-alt)", color: "var(--y-text-tertiary)" }}
+            >
+              <Lock size={16} />
+              <span>Paga el 50% de tu préstamo actual primero</span>
+            </div>
+          ) : (
+            <Link
+              href={`/prestamos/solicitar?monto=${monto}&plazo=${plazo}`}
+              className="w-full font-semibold py-4 px-6 rounded-xl text-center transition-all flex justify-center items-center space-x-2 shadow-lg animate-shimmer-btn"
+              style={{ background: "var(--y-primary)", color: "var(--y-text-on-primary)" }}
+            >
+              <span>Solicitar este préstamo</span>
+              <span className="text-xl">→</span>
+            </Link>
+          )}
           <p className="text-center text-xs font-medium mt-4" style={{ color: "var(--y-text-tertiary)" }}>
-            Sujeto a verificación final del contrato inteligente.
+            {isLoanLocked
+              ? `Llevas ${activeLoan!.paidInstallments} de ${Math.ceil(activeLoan!.termMonths / 2)} cuotas para desbloquear.`
+              : "Sujeto a verificación final del contrato inteligente."}
           </p>
         </div>
       </div>

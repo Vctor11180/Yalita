@@ -4,11 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { useQuipuStore } from "@/stores/quipu.store";
 
 export default function OnboardingPhone() {
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const setUserPhone = useQuipuStore((s) => s.setUserPhone);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/\D/g, "");
@@ -23,6 +25,8 @@ export default function OnboardingPhone() {
     e.preventDefault();
     if (isValid) {
       setIsLoading(true);
+      // Persist phone before navigating so it survives back-navigation
+      setUserPhone(`+591 ${phone}`);
       setTimeout(() => {
         router.push("/onboarding/otp");
       }, 1000);

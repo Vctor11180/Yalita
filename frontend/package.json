@@ -28,7 +28,8 @@
     "viem": "^2.18.0",
     "wagmi": "^2.12.0",
     "zod": "^3.23.0",
-    "zustand": "^4.5.4"
+    "zustand": "^4.5.4",
+    "gsap": "^3.12.5"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
