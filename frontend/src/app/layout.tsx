@@ -10,18 +10,30 @@ const dmSerif = DM_Serif_Display({ weight: "400", subsets: ["latin"], variable: 
 const lora = Lora({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
-  title: { default: "Yalita — Decentralized Payment Identity", template: "%s · Yalita" },
+  title: { default: "Yalita — Identidad Financiera", template: "%s · Yalita" },
   description:
-    "El primer protocolo que convierte tu historial de pagos QR en crédito justo. Sin banco. Sin colateral. Para los 210M de latinos sin acceso a crédito formal.",
+    "Tu reputación es tu mayor activo. Crédito justo sin banco ni colateral para los 210M de latinos sin historial formal.",
   keywords: ["DPI", "Avalanche", "DeFi", "crédito", "Bolivia", "Latam", "Tigo Money", "zkTLS"],
   authors: [{ name: "Yalita Team" }],
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Yalita",
+  },
+  formatDetection: { telephone: false },
   openGraph: {
-    title: "Yalita Protocol",
+    title: "Yalita — Tu reputación es tu mayor activo",
     description: "Crédito justo para los 210M de latinos sin historial bancario.",
     type: "website",
     locale: "es_BO",
   },
   twitter: { card: "summary_large_image" },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  themeColor: "#1E2235",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

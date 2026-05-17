@@ -115,7 +115,7 @@ export default function SplashPage() {
 
       {/* ── Aguayo pattern ─────────────────────────────────────────────────── */}
       <div className="absolute inset-0 opacity-[0.025] pointer-events-none overflow-hidden">
-        <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid repeat">
+        <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
           <defs>
             <pattern id="aguayo" width="20" height="20" patternUnits="userSpaceOnUse">
               <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="#AAEFDF" />
